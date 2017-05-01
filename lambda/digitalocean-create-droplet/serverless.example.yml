@@ -1,0 +1,19 @@
+service: lambda-digitalocean-create-droplet
+provider:
+  name: aws
+  runtime: nodejs6.10
+  profile: etherstellar
+
+  environment:
+    digitalOceanApiKey: TO_REPLACE
+    gitlabApiKey: TO_REPLACE
+    sshKeys: TO_REPLACE
+
+functions:
+  getImageList:
+    handler: help.getImageList
+
+  createDroplet:
+    handler: handler.createDroplet
+    events:
+      - http: post /
