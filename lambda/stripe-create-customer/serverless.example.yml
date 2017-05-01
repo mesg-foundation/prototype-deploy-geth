@@ -1,0 +1,19 @@
+service: lambda-stripe-create-customer
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  profile: etherstellar
+
+  environment:
+    defaultPlanId: TEST
+    stripe_secret_key: sk_test_...
+    stripe_publishable_key: pk_test_...
+
+functions:
+  createCustomer:
+    handler: handler.createCustomer
+    events:
+      - http:
+         path: /
+         method: post
