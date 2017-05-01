@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Etherstellar.io</title>
+  <style>
+    span.error { display: none; }
+  </style>
+</head>
+
+<body>
+
+  <form id="customer-form">
+
+    <span class="error" data-code="auth/email-already-in-use">
+      This email is already used, please connect on your dashboard to get more servers
+    </span>
+
+    <label>
+      email
+      <input type="email">
+    </label>
+
+    <label>
+      password
+      <input type="password">
+    </label>
+
+    <input type="submit">
+  </form>
+
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+</body>
+</html>
