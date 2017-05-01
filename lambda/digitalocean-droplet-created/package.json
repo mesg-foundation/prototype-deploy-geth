@@ -1,5 +1,5 @@
 {
-  "name": "lambda-digitalocean-droplet-created",
+  "name": "etherstellar-lambda-digitalocean-droplet-created",
   "version": "1.0.0",
   "description": "",
   "main": "handler.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/etherstellar/lambda-digitalocean-droplet-created.git"
+    "url": "git@gitlab.com:etherstellar/etherstellar.git"
   },
-  "author": "Anthony Estebe <contact@anthonyestebe.com> (http://microblog.anthonyestebe.com/)",
+  "author": "EtherStellar",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/etherstellar/lambda-digitalocean-droplet-created/issues"
+    "url": "https://gitlab.com/etherstellar/etherstellar/issues"
   },
-  "homepage": "https://gitlab.com/etherstellar/lambda-digitalocean-droplet-created#README",
+  "homepage": "https://gitlab.com/etherstellar/etherstellar",
   "dependencies": {
     "stripe": "^4.18.0"
   }

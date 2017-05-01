@@ -4,12 +4,12 @@ const stripe = require('stripe')(process.env.stripe_secret_key);
 
 /**
  * Handler for error 400
- * @param {Object} error 
+ * @param {Object} error
  * @return a response object with the error and a 400 status code
  */
 const err400 = error => ({ statusCode: 400, body: JSON.stringify(error) })
 
-/** 
+/**
  * Return a success response when the subscription has been created
  * @param {Object}: subscription - https://stripe.com/docs/api#subscriptions
  * @return a response object with the subscription and a 201 status code
@@ -65,8 +65,7 @@ const createSubscription = (event, customer, planId) => {
  */
 module.exports.createCustomer = (event, context, callback) => {
   createCustomer(event)
-  .then(customer => createSubscription(event, customer, process.env.defaultPlanId))
+  .then(customer => createSubscription(event, customer, process.env.default_plan_id))
   .then(subscription => callback(null, successResponse(subscription)))
   .catch(error => callback(error));
 };
-

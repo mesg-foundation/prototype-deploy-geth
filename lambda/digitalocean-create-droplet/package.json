@@ -1,15 +1,22 @@
 {
-  "name": "lambda",
+  "name": "etherstellar-lambda-digitalocean-create-droplet",
   "version": "1.0.0",
-  "description": "```console serverless invoke local --function hello ```",
-  "main": "digitalOcean.js",
-  "dependencies": {
-    "do-wrapper": "^3.11.1"
-  },
-  "devDependencies": {},
+  "description": "",
+  "main": "handler.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.com:etherstellar/etherstellar.git"
+  },
+  "author": "EtherStellar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/etherstellar/etherstellar/issues"
+  },
+  "homepage": "https://gitlab.com/etherstellar/etherstellar",
+  "dependencies": {
+    "stripe": "^4.18.0"
+  }
 }

@@ -1,7 +1,7 @@
 'use strict';
 
 var DigitalOceanWrapper = require('do-wrapper')
-var DigitalOcean = new DigitalOceanWrapper(process.env.digitalOceanApiKey, 25)
+var DigitalOcean = new DigitalOceanWrapper(process.env.digitalocean_key, 25)
 
 module.exports.getImageList = (event, context, callback) => {
 

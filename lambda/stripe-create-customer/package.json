@@ -1,5 +1,5 @@
 {
-  "name": "lambda-stripe-create-customer",
+  "name": "etherstellar-lambda-stripe-create-customer",
   "version": "1.0.0",
   "description": "Lambda function that creates a Stripe customer based on a Stripe token and a plan given in parameter and return the result if the subscription has succeeded",
   "main": "handler.js",
@@ -12,17 +12,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/etherstellar/lambda-stripe-create-customer.git"
+    "url": "git@gitlab.com:etherstellar/etherstellar.git"
   },
   "keywords": [
     "lambda",
     "stripe",
     "customer"
   ],
-  "author": "Anthony Estebe <contact@anthonyestebe.com> (http://microblog.anthonyestebe.com/)",
+  "author": "EtherStellar",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/etherstellar/lambda-stripe-create-customer/issues"
+    "url": "https://gitlab.com/etherstellar/etherstellar"
   },
-  "homepage": "https://gitlab.com/etherstellar/lambda-stripe-create-customer#README"
+  "homepage": "https://gitlab.com/etherstellar/etherstellar"
 }

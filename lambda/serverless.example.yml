@@ -1,0 +1,54 @@
+service: etherstellar
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  profile: etherstellar
+
+  environment:
+    default_plan_id: ...
+    stripe_secret_key: sk_test_...
+    stripe_publishable_key: pk_test_...
+    firebase_endpoint: ...
+    firebase_token: ...
+    digitalocean_key: ...
+    gitlab_key: ...
+    ssh_keys: ...
+
+functions:
+  #stripe-create-customer
+  stripe-create-customer:
+    handler: stripe-create-customer/handler.createCustomer
+    events:
+      - http:
+          path: /
+          method: post
+          cors:
+            origins:
+              - '*'
+
+  #update-firebase-user-from-stripe
+  update-firebase-user-from-stripe-customer:
+    handler: update-firebase-user-from-stripe/handler.updateFromCustomerUpdate
+    events:
+      - http: post /
+
+  update-firebase-user-from-stripe-subscription:
+    handler: update-firebase-user-from-stripe/handler.updateFromSubscriptionUpdate
+    events:
+      - http: post /
+
+  #digitalocean-droplet-created
+  digitalocean-droplet-created:
+    handler: digitalocean-droplet-created/handler.updateMetaData
+    events:
+      - http: post /
+
+  #digitalocean-create-droplet
+  digitalocean-create-droplet:
+    handler: digitalocean-create-droplet/handler.createDroplet
+    events:
+      - http: post /
+
+  digitalocean-create-droplet-get-image-list:
+    handler: digitalocean-create-droplet/help.getImageList

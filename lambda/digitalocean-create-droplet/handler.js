@@ -1,7 +1,7 @@
 'use strict';
 
 var DigitalOceanWrapper = require('do-wrapper')
-var DigitalOcean = new DigitalOceanWrapper(process.env.digitalOceanApiKey, 25)
+var DigitalOcean = new DigitalOceanWrapper(process.env.digitalocean_key, 25)
 
 const errorResponse = (callback, message, data) => {
   let error = JSON.stringify({
@@ -17,7 +17,7 @@ const errorResponse = (callback, message, data) => {
 
 const userDataScript = (name, subscription) => {
   const endpoint = "https://gitlab.com/api/v4/projects/3154379/repository/files/setup.sh/raw?ref=master";
-  const token = process.env.gitlabApiKey
+  const token = process.env.gitlab_key
   return `#!/bin/bash
 curl --request GET --header "PRIVATE-TOKEN: ${token}" "${endpoint}" | sh -s ${subscription}`;
 }
@@ -85,7 +85,7 @@ module.exports.createDroplet = (event, context, callback) => {
     "region": region,
     "size": size,
     "image": "docker",
-    "ssh_keys": process.env.sshKeys.split(","),
+    "ssh_keys": process.env.ssh_keys.split(","),
     "ipv6": true,
     "user_data": userDataScript(name, subscriptionId),
     "monitoring": true,
