@@ -4,6 +4,7 @@ provider:
   name: aws
   runtime: nodejs6.10
   profile: etherstellar
+  memorySize: 128
 
   environment:
     default_plan_id: ...
