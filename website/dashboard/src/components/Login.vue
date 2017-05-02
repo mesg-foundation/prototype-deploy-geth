@@ -3,8 +3,8 @@
     <el-form>
       <el-form-item required :error="error.message">
         <el-input
-          placeholder="Email"
           type="email"
+          :placeholder="$t('email')"
           v-model="email">
         </el-input>
       </el-form-item>
@@ -12,7 +12,7 @@
       <el-form-item required>
         <el-input
           type="password"
-          placeholder="Password"
+          :placeholder="$t('password')"
           v-model="password">
         </el-input>
       </el-form-item>
@@ -23,12 +23,22 @@
           type="primary"
           @click="onSubmit"
           :loading="loading">
-          Signin
+          {{ $t('submit') }}
         </el-button>
       </el-form-item>
     </el-form>
   </el-card>
 </template>
+
+<i18n>
+{
+  "en": {
+    "email": "Email",
+    "password": "Password",
+    "submit": "Signin"
+  }
+}
+</i18n>
 
 <script>
   export default {
