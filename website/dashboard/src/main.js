@@ -1,14 +1,16 @@
 import Vue from 'vue'
-import Vuetify from 'vuetify'
+import ElementUI from 'element-ui'
 import App from '@/App'
 import router from '@/router'
 import store from '@/store'
 import FirebaseMixin from '@/mixins/firebase'
 import { initializeFirebase } from '@/helpers/firebase'
 
+import '../theme/index.css'
+
 Vue.config.productionTip = process.env.NODE_ENV !== 'production'
 
-Vue.use(Vuetify)
+Vue.use(ElementUI)
 Vue.mixin(FirebaseMixin)
 
 /* eslint-disable no-new */
