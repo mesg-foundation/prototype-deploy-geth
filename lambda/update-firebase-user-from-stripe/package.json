@@ -1,8 +1,11 @@
 {
-  "name": "etherstellar-lambda-digitalocean-create-droplet",
+  "name": "update-firebase-user-from-stripe",
   "version": "1.0.0",
   "description": "",
   "main": "handler.js",
+  "dependencies": {
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,13 +13,15 @@
     "type": "git",
     "url": "git@gitlab.com:etherstellar/etherstellar.git"
   },
+  "keywords": [
+    "lambda",
+    "stripe",
+    "customer"
+  ],
   "author": "EtherStellar",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/etherstellar/etherstellar/issues"
+    "url": "https://gitlab.com/etherstellar/etherstellar"
   },
-  "homepage": "https://gitlab.com/etherstellar/etherstellar",
-  "dependencies": {
-    "do-wrapper": "^3.11.1"
-  }
+  "homepage": "https://gitlab.com/etherstellar/etherstellar"
 }

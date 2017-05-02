@@ -1,20 +1,21 @@
-service: etherstellar
+service: es
 
 provider:
   name: aws
   runtime: nodejs6.10
   profile: etherstellar
   memorySize: 128
+  stage: development
+  region: us-east-1
 
   environment:
-    default_plan_id: ...
-    stripe_secret_key: sk_test_...
-    stripe_publishable_key: pk_test_...
-    firebase_endpoint: ...
-    firebase_token: ...
-    digitalocean_key: ...
-    gitlab_key: ...
-    ssh_keys: ...
+    ES_DEFAULT_PLAN_ID: ${env:ES_DEFAULT_PLAN_ID, file(.env.yml):ES_DEFAULT_PLAN_ID}
+    ES_STRIPE_SECRET_KEY: ${env:ES_STRIPE_SECRET_KEY, file(.env.yml):ES_STRIPE_SECRET_KEY}
+    ES_FIREBASE_ENDPOINT: ${env:ES_FIREBASE_ENDPOINT, file(.env.yml):ES_FIREBASE_ENDPOINT}
+    ES_FIREBASE_TOKEN: ${env:ES_FIREBASE_TOKEN, file(.env.yml):ES_FIREBASE_TOKEN}
+    ES_DIGITALOCEAN_KEY: ${env:ES_DIGITALOCEAN_KEY, file(.env.yml):ES_DIGITALOCEAN_KEY}
+    ES_GITLAB_KEY: ${env:ES_GITLAB_KEY, file(.env.yml):ES_GITLAB_KEY}
+    ES_SSH_KEYS: ${env:ES_SSH_KEYS, file(.env.yml):ES_SSH_KEYS}
 
 functions:
   #stripe-create-customer
@@ -22,7 +23,7 @@ functions:
     handler: stripe-create-customer/handler.createCustomer
     events:
       - http:
-          path: /
+          path: /stripe-create-customer
           method: post
           cors:
             origins:
@@ -32,24 +33,24 @@ functions:
   update-firebase-user-from-stripe-customer:
     handler: update-firebase-user-from-stripe/handler.updateFromCustomerUpdate
     events:
-      - http: post /
+      - http: post /update-firebase-user-from-stripe-customer
 
   update-firebase-user-from-stripe-subscription:
     handler: update-firebase-user-from-stripe/handler.updateFromSubscriptionUpdate
     events:
-      - http: post /
+      - http: post /update-firebase-user-from-stripe-subscription
 
   #digitalocean-droplet-created
   digitalocean-droplet-created:
     handler: digitalocean-droplet-created/handler.updateMetaData
     events:
-      - http: post /
+      - http: post /digitalocean-droplet-created
 
   #digitalocean-create-droplet
   digitalocean-create-droplet:
     handler: digitalocean-create-droplet/handler.createDroplet
     events:
-      - http: post /
+      - http: post /digitalocean-create-droplet
 
   digitalocean-create-droplet-get-image-list:
     handler: digitalocean-create-droplet/help.getImageList

@@ -1,6 +1,6 @@
 'use strict';
 
-const stripe = require('stripe')(process.env.stripe_secret_key);
+const stripe = require('stripe')(process.env.ES_STRIPE_SECRET_KEY);
 
 /**
  * Handler for error 400
@@ -65,7 +65,7 @@ const createSubscription = (event, customer, planId) => {
  */
 module.exports.createCustomer = (event, context, callback) => {
   createCustomer(event)
-  .then(customer => createSubscription(event, customer, process.env.default_plan_id))
+  .then(customer => createSubscription(event, customer, process.env.ES_DEFAULT_PLAN_ID))
   .then(subscription => callback(null, successResponse(subscription)))
   .catch(error => callback(error));
 };
