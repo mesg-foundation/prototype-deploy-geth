@@ -1,33 +1,11 @@
 <template>
-  <el-card>
-    <el-form>
-      <el-form-item required :error="error.message">
-        <el-input
-          type="email"
-          :placeholder="$t('email')"
-          v-model="email">
-        </el-input>
-      </el-form-item>
-
-      <el-form-item required>
-        <el-input
-          type="password"
-          :placeholder="$t('password')"
-          v-model="password">
-        </el-input>
-      </el-form-item>
-
-      <el-form-item>
-        <el-button
-          nativeType="submit"
-          type="primary"
-          @click="onSubmit"
-          :loading="loading">
-          {{ $t('submit') }}
-        </el-button>
-      </el-form-item>
-    </el-form>
-  </el-card>
+  <v-card>
+    <v-card-text>
+      <v-text-field v-model="email"/>
+      <v-text-field v-model="password"/>
+      <v-btn @click.native="onSubmit($event)">Submit</v-btn>
+    </v-card-text>
+  </v-card>
 </template>
 
 <i18n>
