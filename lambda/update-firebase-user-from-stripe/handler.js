@@ -1,6 +1,6 @@
 'use strict';
 
-const Stripe = require('stripe')(process.env.stripe_secret_key);
+const Stripe = require('stripe')(process.env.ES_STRIPE_SECRET_KEY);
 const Http = require('axios');
 
 /**
@@ -43,7 +43,7 @@ const extractCustomerInformations = customerId => {
 const updateFirebaseCustomer = customer => {
   const firebaseCustomerId = customer.metadata.firebase_id;
   if (!firebaseCustomerId) { throw new Error('Customer should contain a firebase_id attribute'); }
-  const endpoint = `${process.env.firebase_endpoint}/users/${firebaseCustomerId}.json?auth=${process.env.firebase_token}`;
+  const endpoint = `${process.env.ES_FIREBASE_ENDPOINT}/users/${firebaseCustomerId}.json?auth=${process.env.ES_FIREBASE_TOKEN}`;
   return Http.patch(endpoint, customer)
   .then(response => response.data);
 };
@@ -58,7 +58,7 @@ const updateDataFor = customerId => {
 };
 
 /**
- * Handle for every customer modification, this function is connected to the following 
+ * Handle for every customer modification, this function is connected to the following
  * webhooks in Stripe - https://dashboard.stripe.com/account/webhooks
  *   - customer.created
  *   - customer.deleted
@@ -73,7 +73,7 @@ module.exports.updateFromCustomerUpdate = (event, context, callback) => {
 };
 
 /**
- * Handle for every subscription modification, this function is connected to the following 
+ * Handle for every subscription modification, this function is connected to the following
  * webhooks in Stripe - https://dashboard.stripe.com/account/webhooks
  *   - customer.subscription.created
  *   - customer.subscription.deleted

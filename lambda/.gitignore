@@ -4,6 +4,9 @@ jspm_packages
 
 # Serverless directories
 .serverless
-serverless.yml
 
-*.json
+# Env
+.env.yml
+
+# Mac
+.DS_STORE

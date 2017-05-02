@@ -1,6 +1,6 @@
 'use strict';
 
-const Stripe = require('stripe')(process.env.stripe_secret_key);
+const Stripe = require('stripe')(process.env.ES_STRIPE_SECRET_KEY);
 
 const successResponse = {
   statusCode: 200,

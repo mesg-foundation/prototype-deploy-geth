@@ -1,0 +1,25 @@
+image: node:6.10
+
+stages:
+  - deploy
+
+variables:
+  LAMBDA_PATH: lambda
+  LAMBDA_STRIPE_CREATE_CUSTOMER_PATH: $LAMBDA_PATH/stripe-create-customer
+  LAMBDA_UPDATE_FIREBASE_USER_FROM_STRIPE_PATH: $LAMBDA_PATH/update-firebase-user-from-stripe
+  LAMBDA_DIGITALOCEAN_DROPLET_CREATED_PATH: $LAMBDA_PATH/digitalocean-droplet-created
+  LAMBDA_DIGITALOCEAN_CREATE_DROPLET_PATH: $LAMBDA_PATH/digitalocean-create-droplet
+
+deploy lambda development:
+  stage: deploy
+  script:
+    - sh $LAMBDA_PATH/deploy.sh development
+  only:
+    - development
+
+deploy lambda production:
+  stage: deploy
+  script:
+    - sh $LAMBDA_PATH/deploy.sh production
+  only:
+    - master

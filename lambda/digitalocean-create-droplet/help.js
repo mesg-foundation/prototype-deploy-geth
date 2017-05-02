@@ -1,7 +1,8 @@
 'use strict';
 
+require('dotenv').config()
 var DigitalOceanWrapper = require('do-wrapper')
-var DigitalOcean = new DigitalOceanWrapper(process.env.digitalocean_key, 25)
+var DigitalOcean = new DigitalOceanWrapper(process.env.ES_DIGITALOCEAN_KEY, 25)
 
 module.exports.getImageList = (event, context, callback) => {
 
