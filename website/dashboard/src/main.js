@@ -14,6 +14,8 @@ Vue.use(VueI18n)
 
 Vue.mixin(FirebaseMixin)
 
+initializeFirebase(store, router)
+
 const i18n = new VueI18n({
   locale: 'en'
 })
@@ -24,8 +26,5 @@ new Vue({
   router,
   store,
   i18n,
-  created () {
-    initializeFirebase(this.$store, this.$router)
-  },
   render: h => h(App)
 })
