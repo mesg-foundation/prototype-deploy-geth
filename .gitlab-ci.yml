@@ -10,6 +10,12 @@ variables:
   LAMBDA_DIGITALOCEAN_DROPLET_CREATED_PATH: $LAMBDA_PATH/digitalocean-droplet-created
   LAMBDA_DIGITALOCEAN_CREATE_DROPLET_PATH: $LAMBDA_PATH/digitalocean-create-droplet
 
+  DASHBOARD_PATH: website/dashboard
+  DASHBOARD_BUILD_PATH: $DASHBOARD_PATH/dist/build
+  DASHBOARD_DIST_PATH: $DASHBOARD_PATH/dist
+  DASHBOARD_BUCKET_NAME: dashboard.etherstellar.io
+
+# Lambda
 deploy lambda development:
   stage: deploy
   script:
@@ -27,3 +33,14 @@ deploy lambda production:
     - master
   environment:
     name: production
+
+# Dashboard
+deploy dashboard development:
+  image: noxan/docker-node-awscli-yarn
+  stage: deploy
+  script:
+    - sh $DASHBOARD_BUILD_PATH/deploy.sh development
+  #only:
+  #  - development
+  environment:
+    name: development
