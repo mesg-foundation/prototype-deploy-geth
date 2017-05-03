@@ -22,7 +22,7 @@ deploy lambda development:
   script:
     - sh $LAMBDA_PATH/deploy.sh development
   only:
-    - development
+    - lambda-development
   environment:
     name: development
 
@@ -33,7 +33,7 @@ deploy lambda production:
   only:
     - master
   environment:
-    name: production
+    name: lambda-production
 
 # Dashboard
 deploy dashboard development:
@@ -43,10 +43,10 @@ deploy dashboard development:
     DASHBOARD_BUCKET_NAME: $DASHBOARD_BUCKET_NAME_DEVELOPMENT
   script:
     - sh $DASHBOARD_BUILD_PATH/deploy.sh development
-  #only:
-  #  - development
+  only:
+    - development
   environment:
-    name: development
+    name: dashboard-development
 
 deploy dashboard production:
   image: noxan/docker-node-awscli-yarn
@@ -58,4 +58,4 @@ deploy dashboard production:
   only:
     - master
   environment:
-    name: production
+    name: dashboard-production
