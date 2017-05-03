@@ -4,7 +4,7 @@ import Dashboard from '@/components/dashboard'
 import Login from '@/components/login'
 import Signup from '@/components/signup'
 import ForgotPassword from '@/components/forgot-password'
-import CreateNode from '@/components/CreateNode.vue'
+import CreateNode from '@/components/create-node'
 
 Vue.use(Router)
 

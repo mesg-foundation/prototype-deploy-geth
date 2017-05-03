@@ -1,12 +1,12 @@
 <template>
-  <v-stepper v-model="e6" vertical>
-    <div v-for="step in steps" :key="step.id">
-      <v-stepper-step :step="step.id">
+  <v-stepper v-model="stepsModel" vertical>
+    <div v-for="step, i in steps" :key="step.id">
+      <v-stepper-step :step="step.id" :complete="stepsModel > step.id">
         {{ $t(`${step.key}.title`) }}
-        <small>{{ $t(`${step.key}.description`) }}</small>
+        <small v-if="withDescription">{{ $t(`${step.key}.description`) }}</small>
       </v-stepper-step>
       <v-stepper-content :step="step.id">
-        hello
+        <v-btn primary @click.native="stepsModel += 1">Continue</v-btn>
       </v-stepper-content>
     </div>
   </v-stepper>
@@ -15,7 +15,6 @@
 <i18n>
 {
   "en": {
-    "title": "Create my node",
     "chain": {
       "title": "Select chain",
       "description": "This blockchain will be your distributed database"
@@ -26,7 +25,7 @@
     },
     "payment": {
       "title": "Payment",
-      "description": ""
+      "description": "Pay your new awesome EtherStellar Ethereum Node"
     },
     "submit": "Create my node"
   }
@@ -35,19 +34,21 @@
 
 <script>
   export default {
+    props: {
+      'with-description': Boolean
+    },
     data () {
       return {
-        steps: [
-          { key: 'chain' },
-          { key: 'server' },
-          { key: 'payment' }
-        ].map((e, i) => Object.assign({}, e, { id: i + 1 }))
+        stepsModel: 1,
+        steps: ['chain', 'server', 'payment']
+        .map((e, i) => ({ key: e, id: i + 1 })),
+        node: {
+          chainId: null,
+          planId: null
+        }
       }
     },
     methods: {
-      isComplete (step) {
-        return false
-      },
       onSubmit () {
 
       }
