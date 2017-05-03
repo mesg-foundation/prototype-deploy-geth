@@ -46,7 +46,6 @@
     },
     methods: {
       selectChain (chain) {
-        console.log('aefknafe')
         this.selectedChain = chain
         return this.$emit('changed', this.selectedChain)
       },
