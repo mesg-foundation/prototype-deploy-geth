@@ -13,7 +13,8 @@ variables:
   DASHBOARD_PATH: website/dashboard
   DASHBOARD_BUILD_PATH: $DASHBOARD_PATH/build
   DASHBOARD_DIST_PATH: $DASHBOARD_PATH/dist
-  DASHBOARD_BUCKET_NAME: dashboard.etherstellar.io
+  DASHBOARD_BUCKET_NAME_DEVELOPMENT: development.dashboard.etherstellar.io
+  DASHBOARD_BUCKET_NAME_PRODUCTION: dashboard.etherstellar.io
 
 # Lambda
 deploy lambda development:
@@ -38,9 +39,23 @@ deploy lambda production:
 deploy dashboard development:
   image: noxan/docker-node-awscli-yarn
   stage: deploy
+  variables:
+    - DASHBOARD_BUCKET_NAME: $DASHBOARD_BUCKET_NAME_DEVELOPMENT
   script:
     - sh $DASHBOARD_BUILD_PATH/deploy.sh development
   #only:
   #  - development
   environment:
     name: development
+
+deploy dashboard production:
+  image: noxan/docker-node-awscli-yarn
+  stage: deploy
+  variables:
+    - DASHBOARD_BUCKET_NAME: $DASHBOARD_BUCKET_NAME_PRODUCTION
+  script:
+    - sh $DASHBOARD_BUILD_PATH/deploy.sh production
+  only:
+    - master
+  environment:
+    name: production
