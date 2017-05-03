@@ -22,9 +22,9 @@ deploy lambda development:
   script:
     - sh $LAMBDA_PATH/deploy.sh development
   only:
-    - lambda-development
+    - development
   environment:
-    name: development
+    name: lambda-development
 
 deploy lambda production:
   stage: deploy
