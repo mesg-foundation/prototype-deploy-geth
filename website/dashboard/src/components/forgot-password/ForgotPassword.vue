@@ -33,7 +33,7 @@
 
 <script>
   import { KEYS } from '@/store'
-  import FullPageForm from '@/components/FullPageForm.vue'
+  import FullPageForm from '@/components/full-page-form'
   export default {
     components: {
       FullPageForm

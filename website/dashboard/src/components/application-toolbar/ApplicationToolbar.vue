@@ -16,10 +16,11 @@
 </i18n>
 
 <style lang="stylus" scoped>
-  @import '../variables'
+  @import '../../variables'
 
   .toolbar {
     border-bottom: solid 1px $grey.lighten-3 !important;
+    margin-bottom: 3em;
   }
 
   .toolbar__title,

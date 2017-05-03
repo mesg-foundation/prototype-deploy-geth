@@ -4,14 +4,6 @@
   </div>
 </template>
 
-<i18n>
-{
-  "en": {
-    "loading": "loading"
-  }
-}
-</i18n>
-
 <style>
   .loader {
     position: fixed;

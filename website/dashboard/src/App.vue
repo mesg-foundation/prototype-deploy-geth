@@ -9,8 +9,8 @@
 </template>
 
 <script>
-  import ApplicationToolbar from '@/components/ApplicationToolbar.vue'
-  import FullPageLoader from '@/components/FullPageLoader.vue'
+  import ApplicationToolbar from '@/components/application-toolbar'
+  import FullPageLoader from '@/components/full-page-loader'
   export default {
     components: {
       ApplicationToolbar,

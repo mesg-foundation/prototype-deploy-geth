@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Dashboard from '@/components/Dashboard.vue'
-import Login from '@/components/Login.vue'
-import Signup from '@/components/Signup.vue'
-import NewPassword from '@/components/NewPassword.vue'
+import Dashboard from '@/components/dashboard'
+import Login from '@/components/login'
+import Signup from '@/components/signup'
+import ForgotPassword from '@/components/forgot-password'
+import CreateNode from '@/components/CreateNode.vue'
 
 Vue.use(Router)
 
@@ -14,12 +15,12 @@ export default new Router({
 
     // Login etc..
     { path: '/login', name: 'Login', component: Login },
-    { path: '/forgot-password', name: 'ForgotPassword', component: NewPassword },
+    { path: '/forgot-password', name: 'ForgotPassword', component: ForgotPassword },
     { path: '/sigup', name: 'Signup', component: Signup },
 
     // Nodes
     { path: '/nodes', name: 'Nodes', component: Dashboard },
-    { path: '/nodes/new', name: 'CreateNode' },
+    { path: '/nodes/new', name: 'CreateNode', component: CreateNode },
     { path: '/nodes/:id', name: 'Node' },
 
     // Account
