@@ -19,7 +19,12 @@ export const KEYS = {
 export default new Vuex.Store({
   state: {
     user: null,
-    connected: false
+    connected: false,
+    chainList: [
+      { id: 'mainnet', name: 'MainNet', description: 'This is the production ready blockchain' },
+      { id: 'testnet', name: 'TestNet', description: 'This is the blockchain for testing' }
+    ],
+    planList: []
   },
   actions: {
     [KEYS.ACTIONS.SIGNUP] (_, { email, password }) {
