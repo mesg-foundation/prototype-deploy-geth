@@ -40,7 +40,7 @@ deploy dashboard development:
   image: noxan/docker-node-awscli-yarn
   stage: deploy
   variables:
-    - DASHBOARD_BUCKET_NAME: $DASHBOARD_BUCKET_NAME_DEVELOPMENT
+    DASHBOARD_BUCKET_NAME: $DASHBOARD_BUCKET_NAME_DEVELOPMENT
   script:
     - sh $DASHBOARD_BUILD_PATH/deploy.sh development
   #only:
@@ -52,7 +52,7 @@ deploy dashboard production:
   image: noxan/docker-node-awscli-yarn
   stage: deploy
   variables:
-    - DASHBOARD_BUCKET_NAME: $DASHBOARD_BUCKET_NAME_PRODUCTION
+    DASHBOARD_BUCKET_NAME: $DASHBOARD_BUCKET_NAME_PRODUCTION
   script:
     - sh $DASHBOARD_BUILD_PATH/deploy.sh production
   only:
