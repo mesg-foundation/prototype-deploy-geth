@@ -1,0 +1,12 @@
+[
+  {
+    "id": "mainnet",
+    "name": "MainNet",
+    "description": "This is the production ready blockchain"
+  },
+  {
+    "id": "testnet",
+    "name": "TestNet",
+    "description": "This is the blockchain for testing"
+  }
+]
