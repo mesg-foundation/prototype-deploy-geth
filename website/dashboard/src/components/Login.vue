@@ -79,6 +79,7 @@
           email: this.email,
           password: this.password
         })
+        .then(() => this.$router.push('/'))
         .catch(error => {
           this.loading = false
           this.error = error

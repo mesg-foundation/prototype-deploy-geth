@@ -32,7 +32,6 @@ const onSignIn = (store, router, user) => {
       uid,
       data: snapshot.val()
     })
-    router.push('/')
   })
 }
 
