@@ -9,10 +9,10 @@ var DigitalOcean = new DigitalOceanWrapper(process.env.ES_DIGITALOCEAN_KEY, 25)
  * @return The script
  */
 const userDataScript = (subscriptionId) => {
-  const endpoint = "https://gitlab.com/api/v4/projects/3154379/repository/files/setup.sh/raw?ref=master"; //@todo: use env variable
+  const endpoint = "https://gitlab.com/api/v4/projects/3154379/repository/files/setup.sh/raw?ref=master" //@todo: update url
   const token = process.env.ES_GITLAB_KEY
   return `#!/bin/bash
-curl --request GET --header "PRIVATE-TOKEN: ${token}" "${endpoint}" | sh -s ${subscriptionId}`;
+curl --request GET --header "PRIVATE-TOKEN: ${token}" "${endpoint}" | sh -s ${subscriptionId}`
 }
 
 /**
@@ -65,13 +65,13 @@ module.exports.createDroplet = (event, context, callback) => {
   })
   .then ( _ => {
     callback(null, {
-        statusCode: 200,
-        body: JSON.stringify({
-          message: 'Droplet created'
-        })
+      statusCode: 200,
+      body: JSON.stringify({
+        message: 'Droplet created'
       })
+    })
   })
-  .catch((error) => {
+  .catch( error => {
     console.log(error)
     callback(JSON.stringify(error))
   })
