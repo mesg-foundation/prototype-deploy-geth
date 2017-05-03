@@ -12,5 +12,5 @@ if git diff HEAD~ --name-only|grep $DASHBOARD_PATH; then
   npm --prefix $DASHBOARD_PATH run build
 
   echo "Deploying dist folder to s3"
-  aws s3 sync $DASHBOARD_DIST_PATH s3://$DASHBOARD_BUCKET_NAME --recursive --acl public-read
+  aws s3 sync $DASHBOARD_DIST_PATH s3://$DASHBOARD_BUCKET_NAME --acl public-read
 fi;
