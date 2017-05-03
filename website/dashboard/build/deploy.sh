@@ -3,9 +3,6 @@
 if git diff HEAD~ --name-only|grep $DASHBOARD_PATH; then
   echo "Environment $1"
 
-  #echo "Install yarn"
-  #npm install --global yarn
-
   echo "Build node modules"
   cd $DASHBOARD_PATH
   yarn

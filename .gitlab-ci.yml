@@ -11,7 +11,7 @@ variables:
   LAMBDA_DIGITALOCEAN_CREATE_DROPLET_PATH: $LAMBDA_PATH/digitalocean-create-droplet
 
   DASHBOARD_PATH: website/dashboard
-  DASHBOARD_BUILD_PATH: $DASHBOARD_PATH/dist/build
+  DASHBOARD_BUILD_PATH: $DASHBOARD_PATH/build
   DASHBOARD_DIST_PATH: $DASHBOARD_PATH/dist
   DASHBOARD_BUCKET_NAME: dashboard.etherstellar.io
 
