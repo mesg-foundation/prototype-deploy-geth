@@ -1,14 +1,25 @@
 ## Usage
 
 ```html
-<plan-selection action-title="choose this plan"></plan-selection>
+<plan-selection
+  actionTitle="Choose this plan"
+  :plans="[]">
+</plan-selection>
 ```
 
 ## Props
 
 | name | type | required | default |
 | ---- | ---- | -------- | ------- |
-| action-title | String | false | "Choose this plan" |
+| plans | Array<PlanInformation> | true | null |
+| actionTitle | String | false | "Choose this plan" |
+
+**PlanInformation** should be an object with the properties:
+  - **id** {String}: An Id to identify the plan
+  - **title** {String}: The title of the plan
+  - **price** {Number}: The price in cents of the plan per month
+  - **currency** {String}: ISO code of the currency (USD, EUR, GBP...)
+  - **metadata** {Object}: A key value object with some metadata about the plan
 
 ## Slots
 
