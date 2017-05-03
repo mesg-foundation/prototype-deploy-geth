@@ -14,7 +14,7 @@
       </v-card-text>
     </v-card>
 
-    <v-btn primary @click.native="submit">
+    <v-btn primary :disabled="!selectedPlan" @click.native="submit">
       {{ this.actionTitle || $t('defaultActionTitle') }}
     </v-btn>
   </div>

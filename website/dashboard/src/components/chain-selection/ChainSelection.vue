@@ -13,7 +13,7 @@
       </v-card-text>
     </v-card>
 
-    <v-btn primary @click.native="submit">
+    <v-btn primary :disabled="!selectedChain" @click.native="submit">
       {{ this.actionTitle || $t('defaultActionTitle') }}
     </v-btn>
   </div>
