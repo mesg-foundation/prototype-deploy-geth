@@ -1,16 +1,10 @@
 <template>
-  <full-page-form :title="$t('title')">
+  <full-page-form :title="$t('title')" v-if="!success">
     <v-text-field
       v-model="email"
       :label="$t('email')"
       :rules="emailRules"
       type="email">
-    </v-text-field>
-
-    <v-text-field
-      v-model="password"
-      :label="$t('password')"
-      type="password">
     </v-text-field>
 
     <v-btn
@@ -19,32 +13,20 @@
       @click.native.cancel="onSubmit()">
       {{ $t('submit') }}
     </v-btn>
-
-    <v-btn
-      block flat
-      router :to="{ name: 'ForgotPassword' }">
-      {{ $t('forgot') }}
-    </v-btn>
-
-    <template slot="secondary-actions">
-      <v-btn
-        block flat dark
-        router :to="{ name: 'Signup' }">
-        {{ $t('signup') }}
-      </v-btn>
-    </template>
+  </full-page-form>
+  <full-page-form :title="$t('sent')" v-else>
+    <p>{{ $t('success') }}</p>
   </full-page-form>
 </template>
 
 <i18n>
 {
   "en": {
-    "title": "Login",
-    "email": "Email Address",
-    "password": "Password",
-    "submit": "Log In",
-    "forgot": "Forgot password ?",
-    "signup": "Signup now !"
+    "title": "Reset Password",
+    "email": "Email",
+    "submit": "Reset my password",
+    "sent": "Email sent",
+    "success": "An email has been sent with the instructions to reset your password"
   }
 }
 </i18n>
@@ -59,9 +41,9 @@
     data () {
       return {
         loading: false,
+        success: false,
         error: null,
-        email: '',
-        password: ''
+        email: ''
       }
     },
     computed: {
@@ -75,9 +57,12 @@
     methods: {
       onSubmit () {
         this.loading = true
-        this.$store.dispatch(KEYS.ACTIONS.SIGNIN, {
-          email: this.email,
-          password: this.password
+        this.$store.dispatch(KEYS.ACTIONS.SEND_RESET_PASSWORD_MAIL, {
+          email: this.email
+        })
+        .then(() => {
+          this.loading = false
+          this.success = true
         })
         .catch(error => {
           this.loading = false

@@ -5,6 +5,9 @@ export default {
     },
     currentUser () {
       return this.$store.state.user
+    },
+    loadingUser () {
+      return this.currentUser === null
     }
   }
 }

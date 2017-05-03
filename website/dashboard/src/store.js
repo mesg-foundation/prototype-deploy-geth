@@ -6,7 +6,9 @@ Vue.use(Vuex)
 
 export const KEYS = {
   ACTIONS: {
-    SIGNIN: 'SIGNIN'
+    SIGNIN: 'SIGNIN',
+    SIGNUP: 'SIGNUP',
+    SEND_RESET_PASSWORD_MAIL: 'SEND_RESET_PASSWORD_MAIL'
   },
   MUTATIONS: {
     SET_USER: 'SET_USER',
@@ -20,9 +22,17 @@ export default new Vuex.Store({
     connected: false
   },
   actions: {
-    [KEYS.ACTIONS.SIGNIN] (data, { email, password }) {
+    [KEYS.ACTIONS.SIGNUP] (_, { email, password }) {
+      return Firebase.auth()
+      .createUserWithEmailAndPassword(email, password)
+    },
+    [KEYS.ACTIONS.SIGNIN] (_, { email, password }) {
       return Firebase.auth()
       .signInWithEmailAndPassword(email, password)
+    },
+    [KEYS.ACTIONS.SEND_RESET_PASSWORD_MAIL] (_, { email }) {
+      return Firebase.auth()
+      .sendPasswordResetEmail(email)
     }
   },
   mutations: {

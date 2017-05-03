@@ -5,6 +5,7 @@ export const firebaseApp = Firebase.initializeApp(process.env.FIREBASE_AUTH)
 export const firebaseDB = firebaseApp.database()
 
 const onSignIn = (store, router, user) => {
+  store.commit(KEYS.MUTATIONS.SET_USER, null)
   const {
     isAnonyme,
     displayName,
@@ -37,7 +38,7 @@ const onSignIn = (store, router, user) => {
 
 const onSignOut = (store, router) => {
   store.commit(KEYS.MUTATIONS.CONNECTED, false)
-  store.commit(KEYS.MUTATIONS.SET_USER, null)
+  store.commit(KEYS.MUTATIONS.SET_USER, {})
   router.push('/login')
 }
 

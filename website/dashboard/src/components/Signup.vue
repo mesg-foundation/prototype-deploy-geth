@@ -10,6 +10,7 @@
     <v-text-field
       v-model="password"
       :label="$t('password')"
+      :rules="passwordRules"
       type="password">
     </v-text-field>
 
@@ -20,16 +21,10 @@
       {{ $t('submit') }}
     </v-btn>
 
-    <v-btn
-      block flat
-      router :to="{ name: 'ForgotPassword' }">
-      {{ $t('forgot') }}
-    </v-btn>
-
     <template slot="secondary-actions">
       <v-btn
         block flat dark
-        router :to="{ name: 'Signup' }">
+        router :to="{ name: 'Login' }">
         {{ $t('signup') }}
       </v-btn>
     </template>
@@ -39,12 +34,11 @@
 <i18n>
 {
   "en": {
-    "title": "Login",
+    "title": "Sign Up",
     "email": "Email Address",
     "password": "Password",
-    "submit": "Log In",
-    "forgot": "Forgot password ?",
-    "signup": "Signup now !"
+    "submit": "Sign Up",
+    "signup": "I alredy have an account !"
   }
 }
 </i18n>
@@ -66,7 +60,13 @@
     },
     computed: {
       emailRules () {
-        if (!this.error) { return [] }
+        if (!this.error || !this.error.code.match(/email/)) { return [] }
+        return [
+          () => this.error.message
+        ]
+      },
+      passwordRules () {
+        if (!this.error || !this.error.code.match(/password/)) { return [] }
         return [
           () => this.error.message
         ]
@@ -75,7 +75,7 @@
     methods: {
       onSubmit () {
         this.loading = true
-        this.$store.dispatch(KEYS.ACTIONS.SIGNIN, {
+        this.$store.dispatch(KEYS.ACTIONS.SIGNUP, {
           email: this.email,
           password: this.password
         })
