@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if git diff HEAD~ --name-only|grep $LAMBDA_PATH; then
+#if git diff HEAD~ --name-only|grep $LAMBDA_PATH; then
   echo "## Environment $1 ##"
 
   echo "## Build lambda ##"
@@ -12,4 +12,4 @@ if git diff HEAD~ --name-only|grep $LAMBDA_PATH; then
 
   echo "## Deploying lambda ##"
   cd $LAMBDA_PATH && serverless deploy --stage $1
-fi;
+#fi;
