@@ -5,7 +5,7 @@
         xs12 sm6 md4 lg3
         v-for="item in items" :key="item.id">
         <v-card
-          class="ma-1"
+          class="ma-1 selectable-card"
           :class="[ selected(item) ? selectedClass : '' ]"
           @click="select(item)">
           <slot :item="item"></slot>
@@ -52,3 +52,9 @@
     }
   }
 </script>
+
+<style scoped>
+  .selectable-card {
+    cursor: pointer;
+  }
+</style>
