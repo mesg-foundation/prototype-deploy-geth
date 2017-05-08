@@ -6,7 +6,7 @@
         v-for="item in items" :key="item.id">
         <v-card
           class="ma-1 selectable-card"
-          :class="[ selected(item) ? selectedClass : '' ]"
+          :class="{ selected: selected(item) }"
           @click="select(item)">
           <slot :item="item"></slot>
         </v-card>
@@ -15,24 +15,12 @@
   </v-container>
 </template>
 
-<i18n>
-  {
-    "en": {
-
-    }
-  }
-</i18n>
-
 <script>
   export default {
     props: {
       items: {
         type: Array,
         required: true
-      },
-      selectedClass: {
-        type: String,
-        default: 'primary white--text'
       }
     },
     data () {
@@ -53,8 +41,16 @@
   }
 </script>
 
-<style scoped>
+<style lang="stylus" scoped>
+  @import "../../variables";
+
   .selectable-card {
     cursor: pointer;
+    border: solid 1px transparent;
+  }
+
+  .selectable-card.selected {
+    background-color: $selectable-card-selected-background-color;
+    border-color: $selectable-card-selected-border-color;
   }
 </style>

@@ -7,6 +7,6 @@
   {
     "id": "testnet",
     "name": "TestNet",
-    "description": "This is the blockchain for testing"
+    "description": "This is the blockchain for testing only"
   }
 ]
