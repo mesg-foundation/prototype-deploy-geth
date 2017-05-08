@@ -37,7 +37,13 @@
       },
       price () {
         return (this.amount / 100).toFixed(this.decimals)
+      },
+      priceToString () {
+        return this.prepend ? `${this.symbol}${this.price}` : `${this.price}${this.symbol}`
       }
+    },
+    render (createElement) {
+      return createElement('span', this.priceToString())
     }
   }
 </script>

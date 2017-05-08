@@ -1,10 +1,7 @@
 ## Usage
 
 ```html
-<plan-selection
-  actionTitle="Choose this plan"
-  :plans="[]">
-</plan-selection>
+<plan-selection :plans="[]"></plan-selection>
 ```
 
 ## Props
@@ -12,7 +9,6 @@
 | name | type | required | default |
 | ---- | ---- | -------- | ------- |
 | plans | `Array<PlanInformation>` | true | `null` |
-| actionTitle | `String` | false | `"Choose this plan"` |
 
 **PlanInformation** should be an object with the properties:
   - **id** {String}: An Id to identify the plan
@@ -27,5 +23,4 @@ None
 
 ## Events
 
-**changed (plan)** the plan selectection has changed
-**completed (plan)** the selection of the plan has been confirmed by the user
+**selected (plan)** the plan selectection has changed

@@ -1,58 +1,17 @@
-<template>
-  <v-stepper v-model="currentStep" vertical>
-    <template v-for="step, i in steps">
-      <v-stepper-step
-        :key="step.id"
-        :step="step.id"
-        :editable="editable"
-        :complete="currentStep > step.id">
-        {{ $t(`${step.key}.title`) }}
-        <small v-if="withDescription">{{ $t(`${step.key}.description`) }}</small>
-      </v-stepper-step>
-      <v-stepper-content :step="step.id">
-        <chain-selection
-          v-if="step.key === 'chain'"
-          :chains="chains"
-          :actionTitle="$t('chain.title')">
-        </chain-selection>
-
-        <plan-selection
-          v-if="step.key === 'plan' && node.chain"
-          :plans="plans"
-          :actionTitle="$t('plan.title')">
-        </plan-selection>
-
-        <payment-form
-          v-if="step.key === 'payment' && node.plan && node.chain"
-          :plan="node.plan"
-          :chain="node.chain">
-        </payment-form>
-      </v-stepper-content>
-    </template>
-  </v-stepper>
-</template>
-
 <i18n>
   {
     "en": {
       "chain": {
         "title": "Select chain",
-        "description": "This blockchain will be your distributed database",
-        "action": "Select my server"
+        "description": "This blockchain will be your distributed database"
       },
       "plan": {
         "title": "Select your server",
-        "description": "The server will be the machine that process your blockchain",
-        "action": "Process to payment"
+        "description": "The server will be the machine that process your blockchain"
       },
       "payment": {
         "title": "Payment",
-        "description": "Pay your new awesome EtherStellar Ethereum Node",
-        "action": "Pay now"
-      },
-      "creation": {
-        "title": "Creation of your server",
-        "description": "Your server is being created with your chain"
+        "description": "Pay your new awesome EtherStellar Ethereum Node"
       },
       "submit": "Create my node"
     }
@@ -64,21 +23,40 @@
   import PlanSelection from '@/components/plan-selection'
   import PaymentForm from '@/components/payment-form'
   export default {
-    components: {
-      ChainSelection,
-      PlanSelection,
-      PaymentForm
-    },
-    props: {
-      'with-description': Boolean
-    },
     computed: {
-      currentStep () { return this.$store.state.newNodeStep },
-      steps () { return this.$store.state.newNodeStepList },
       node () { return this.$store.state.newNode },
       chains () { return this.$store.state.chainList },
       plans () { return this.$store.state.planList },
-      editable () { return this.currentStep < this.steps.length }
+      steps () {
+        return [
+          {
+            key: 'chain',
+            component: ChainSelection,
+            props: { chains: this.chains }
+          },
+          {
+            key: 'plan',
+            component: PlanSelection,
+            props: { plans: this.plans }
+          },
+          {
+            key: 'payment',
+            component: PaymentForm,
+            props: {
+              plan: this.node.plan,
+              chain: this.node.chain
+            }
+          }
+        ]
+      }
+    },
+    render (createElement) {
+      const renderStep = step => createElement('section', [
+        createElement('h1', this.$t(`${step.key}.title`)),
+        createElement('p', this.$t(`${step.key}.description`)),
+        createElement(step.component, { props: step.props })
+      ])
+      return createElement('div', this.steps.map(renderStep))
     }
   }
 </script>

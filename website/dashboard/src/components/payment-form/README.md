@@ -11,8 +11,8 @@
 
 | name | type | required | default |
 | ---- | ---- | -------- | ------- |
-| chain | `ChainInformation` | true | `null` |
-| plan | `PlanInformation` | true | `null` |
+| chain | `ChainInformation` | false | `null` |
+| plan | `PlanInformation` | false | `null` |
 
 **ChainInformation** should be an object with the properties:
   - **id** {String}: An Id to identify the chain

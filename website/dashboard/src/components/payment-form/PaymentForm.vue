@@ -1,6 +1,6 @@
 <template>
   <div>
-    hello
+    isValid: {{valid}}
   </div>
 </template>
 
@@ -17,15 +17,17 @@
     props: {
       chain: {
         type: Object,
-        required: true
+        default: null
       },
       plan: {
         type: Object,
-        required: true
+        default: null
       }
     },
-    methods: {
-
+    computed: {
+      valid () {
+        return !!this.plan && !!this.chain
+      }
     }
   }
 </script>

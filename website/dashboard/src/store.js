@@ -27,14 +27,7 @@ export default new Vuex.Store({
     newNode: {
       plan: null,
       chain: null
-    },
-    newNodeStep: 1,
-    newNodeStepList: [
-      { id: 1, key: 'chain' },
-      { id: 2, key: 'plan' },
-      { id: 3, key: 'payment' },
-      { id: 4, key: 'creation' }
-    ]
+    }
   },
   actions: {
     [KEYS.ACTIONS.SIGNUP] (_, { email, password }) {
@@ -59,11 +52,9 @@ export default new Vuex.Store({
     },
     [KEYS.MUTATIONS.SELECT_CHAIN] (state, { chain }) {
       state.newNode = { ...state.newNode, chain }
-      state.newNodeStep = state.newNodeStepList.find(e => e.key === 'chain').id + 1
     },
     [KEYS.MUTATIONS.SELECT_PLAN] (state, { plan }) {
       state.newNode = { ...state.newNode, plan }
-      state.newNodeStep = state.newNodeStepList.find(e => e.key === 'plan').id + 1
     }
   }
 })

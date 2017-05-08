@@ -1,64 +1,54 @@
 <template>
-  <div>
-    <selectable-grid
-      :items="plans"
-      @selected="selectPlan">
-      <template scope="props">
-        <v-card-title v-if="props.item.title">
-          {{ props.item.title }}
-          {{ props.item.price }}
-        </v-card-title>
+  <selectable-grid
+    :items="plans"
+    @selected="selectPlan">
+    <template scope="props">
+      <v-card-title class="title">
+        {{ props.item.title }}
+      </v-card-title>
 
-        <v-card-text v-if="props.item.description">
-          {{ props.item.description }}
-        </v-card-text>
-      </template>
-    </selectable-grid>
+      <v-card-title class="primary white--text">
+        <price
+          :amount="props.item.price"
+          :currency="props.item.currency">
+        </price>
+      </v-card-title>
 
-    <v-btn class="ma-1 mt-3" primary :disabled="!selectedPlan" @click.native="submit">
-      {{ this.actionTitle || $t('defaultActionTitle') }}
-    </v-btn>
-  </div>
+      <v-card-text>
+        <v-list two-line subheader>
+          <v-list-item v-for="(value, key) in props.item.metadata" :key="key">
+            <v-list-tile>
+              <v-list-tile-content>
+                <v-list-tile-title>{{ key }}</v-list-tile-title>
+                <v-list-tile-sub-title> {{ value }}</v-list-tile-sub-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list-item>
+        </v-list>
+      </v-card-text>
+    </template>
+  </selectable-grid>
 </template>
-
-<i18n>
-  {
-    "en": {
-      "defaultActionTitle": "Choose this plan"
-    }
-  }
-</i18n>
 
 <script>
   import { KEYS } from '@/store'
   import SelectableGrid from '@/components/selectable-grid'
+  import Price from '@/components/price'
   export default {
     components: {
-      SelectableGrid
+      SelectableGrid,
+      Price
     },
     props: {
       plans: {
         type: Array,
         required: true
-      },
-      actionTitle: {
-        type: String,
-        default: null
-      }
-    },
-    data () {
-      return {
-        selectedPlan: this.$store.state.newNode.plan
       }
     },
     methods: {
       selectPlan (plan) {
-        this.selectedPlan = plan
-        return this.$emit('changed', this.selectedPlan)
-      },
-      submit (plan) {
-        this.$store.commit(KEYS.MUTATIONS.SELECT_PLAN, { plan: this.selectedPlan })
-        return this.$emit('completed', this.selectedPlan)
+        this.$store.commit(KEYS.MUTATIONS.SELECT_PLAN, { plan })
+        return this.$emit('selected', plan)
       }
     }
   }
