@@ -67,26 +67,26 @@ deploy dashboard production:
     name: dashboard-production
 
 # Etherstellar.io
-deploy etherstellar.io development:
-  image: noxan/docker-node-awscli-yarn
-  stage: deploy
-  variables:
-    ETHERSTELLAR_IO_BUCKET_NAME: $ETHERSTELLAR_IO_BUCKET_NAME_DEVELOPMENT
-  script:
-    - sh $DASHBOARD_BUILD_PATH/deploy.sh development
-  only:
-    - development
-  environment:
-    name: etherstellar.io-development
-
-deploy etherstellar.io production:
-  image: noxan/docker-node-awscli-yarn
-  stage: deploy
-  variables:
-    ETHERSTELLAR_IO_BUCKET_NAME: $ETHERSTELLAR_IO_BUCKET_NAME_PRODUCTION
-  script:
-    - sh $ETHERSTELLAR_IO_BUILD_PATH/deploy.sh production
-  only:
-    - master
-  environment:
-    name: etherstellar.io-production
+# deploy etherstellar.io development:
+#   image: noxan/docker-node-awscli-yarn
+#   stage: deploy
+#   variables:
+#     ETHERSTELLAR_IO_BUCKET_NAME: $ETHERSTELLAR_IO_BUCKET_NAME_DEVELOPMENT
+#   script:
+#     - sh $ETHERSTELLAR_IO_BUILD_PATH/deploy.sh development
+#   only:
+#     - development
+#   environment:
+#     name: etherstellar.io-development
+#
+# deploy etherstellar.io production:
+#   image: noxan/docker-node-awscli-yarn
+#   stage: deploy
+#   variables:
+#     ETHERSTELLAR_IO_BUCKET_NAME: $ETHERSTELLAR_IO_BUCKET_NAME_PRODUCTION
+#   script:
+#     - sh $ETHERSTELLAR_IO_BUILD_PATH/deploy.sh production
+#   only:
+#     - master
+#   environment:
+#     name: etherstellar.io-production
