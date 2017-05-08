@@ -12,8 +12,7 @@
       "payment": {
         "title": "Payment",
         "description": "Pay your new awesome EtherStellar Ethereum Node"
-      },
-      "submit": "Create my node"
+      }
     }
   }
 </i18n>
@@ -29,31 +28,16 @@
       plans () { return this.$store.state.planList },
       steps () {
         return [
-          {
-            key: 'chain',
-            component: ChainSelection,
-            props: { chains: this.chains }
-          },
-          {
-            key: 'plan',
-            component: PlanSelection,
-            props: { plans: this.plans }
-          },
-          {
-            key: 'payment',
-            component: PaymentForm,
-            props: {
-              plan: this.node.plan,
-              chain: this.node.chain
-            }
-          }
+          { key: 'chain', component: ChainSelection, props: { chains: this.chains } },
+          { key: 'plan', component: PlanSelection, props: { plans: this.plans } },
+          { key: 'payment', component: PaymentForm, props: { plan: this.node.plan, chain: this.node.chain }, notext: true }
         ]
       }
     },
     render (createElement) {
-      const renderStep = step => createElement('section', [
-        createElement('h1', this.$t(`${step.key}.title`)),
-        createElement('p', this.$t(`${step.key}.description`)),
+      const renderStep = step => createElement('section', { class: 'mb-5' }, [
+        step.notext ? null : createElement('h1', { class: 'headline' }, this.$t(`${step.key}.title`)),
+        step.notext ? null : createElement('p', this.$t(`${step.key}.description`)),
         createElement(step.component, { props: step.props })
       ])
       return createElement('div', this.steps.map(renderStep))
