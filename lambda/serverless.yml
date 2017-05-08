@@ -23,7 +23,7 @@ functions:
     handler: stripe-create-customer/handler.createCustomer
     events:
       - http:
-          path: /stripe-create-customer
+          path: /customers
           method: post
           cors:
             origins:
@@ -33,24 +33,24 @@ functions:
   update-firebase-user-from-stripe-customer:
     handler: update-firebase-user-from-stripe/handler.updateFromCustomerUpdate
     events:
-      - http: post /update-firebase-user-from-stripe-customer
+      - http: post /users/customer
 
   update-firebase-user-from-stripe-subscription:
     handler: update-firebase-user-from-stripe/handler.updateFromSubscriptionUpdate
     events:
-      - http: post /update-firebase-user-from-stripe-subscription
+      - http: post /users/subscription
 
   #digitalocean-droplet-created
   digitalocean-droplet-created:
     handler: digitalocean-droplet-created/handler.updateMetaData
     events:
-      - http: post /digitalocean-droplet-created
+      - http: post /users/nodes
 
   #digitalocean-create-droplet
   digitalocean-create-droplet:
     handler: digitalocean-create-droplet/handler.createDroplet
     events:
-      - http: post /digitalocean-create-droplet
+      - http: post /nodes
 
-  digitalocean-create-droplet-get-image-list:
-    handler: digitalocean-create-droplet/help.getImageList
+  #digitalocean-create-droplet-get-image-list:
+  #  handler: digitalocean-create-droplet/help.getImageList
