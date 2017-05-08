@@ -1,7 +1,7 @@
 <template>
-  <v-stepper v-model="stepsModel" vertical>
+  <v-stepper v-model="currentStep" vertical>
     <div v-for="step, i in steps" :key="step.id">
-      <v-stepper-step :step="step.id" :complete="stepsModel > step.id">
+      <v-stepper-step :step="step.id" :complete="currentStep > step.id">
         {{ $t(`${step.key}.title`) }}
         <small v-if="withDescription">{{ $t(`${step.key}.description`) }}</small>
       </v-stepper-step>
@@ -9,16 +9,20 @@
         <chain-selection
           v-if="step.key === 'chain'"
           :chains="chains"
-          :actionTitle="$t('chain.title')"
-          @completed="chainSelected">
+          :actionTitle="$t('chain.title')">
         </chain-selection>
 
         <plan-selection
-          v-if="step.key === 'plan'"
+          v-if="step.key === 'plan' && node.chain"
           :plans="plans"
-          :actionTitle="$t('plan.title')"
-          @completed="planSelected">
+          :actionTitle="$t('plan.title')">
         </plan-selection>
+
+        <payment-form
+          v-if="step.key === 'payment' && node.plan && node.chain"
+          :plan="node.plan"
+          :chain="node.chain">
+        </payment-form>
       </v-stepper-content>
     </div>
   </v-stepper>
@@ -54,49 +58,22 @@
 <script>
   import ChainSelection from '@/components/chain-selection'
   import PlanSelection from '@/components/plan-selection'
+  import PaymentForm from '@/components/payment-form'
   export default {
     components: {
       ChainSelection,
-      PlanSelection
+      PlanSelection,
+      PaymentForm
     },
     props: {
       'with-description': Boolean
     },
-    data () {
-      return {
-        stepsModel: 1,
-        steps: [
-          { id: 1, key: 'chain' },
-          { id: 2, key: 'plan' },
-          { id: 3, key: 'payment' },
-          { id: 4, key: 'creation' }
-        ],
-        node: {
-          chain: null,
-          plan: null
-        }
-      }
-    },
     computed: {
-      chains () {
-        return this.$store.state.chainList
-      },
-      plans () {
-        return this.$store.state.planList
-      }
-    },
-    methods: {
-      nextStep () {
-        this.stepsModel += 1
-      },
-      chainSelected (chain) {
-        this.node.chain = chain
-        this.nextStep()
-      },
-      planSelected (plan) {
-        this.node.plan = plan
-        this.nextStep()
-      }
+      currentStep () { return this.$store.state.newNodeStep },
+      steps () { return this.$store.state.newNodeStepList },
+      node () { return this.$store.state.newNode },
+      chains () { return this.$store.state.chainList },
+      plans () { return this.$store.state.planList }
     }
   }
 </script>

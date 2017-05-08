@@ -28,6 +28,7 @@
 </i18n>
 
 <script>
+  import { KEYS } from '@/store'
   export default {
     props: {
       chains: {
@@ -50,6 +51,7 @@
         return this.$emit('changed', this.selectedChain)
       },
       submit (chain) {
+        this.$store.commit(KEYS.MUTATIONS.SELECT_CHAIN, { chain: this.selectedChain })
         return this.$emit('completed', this.selectedChain)
       }
     }

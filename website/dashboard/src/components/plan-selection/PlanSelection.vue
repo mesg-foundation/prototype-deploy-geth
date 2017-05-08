@@ -29,6 +29,7 @@
 </i18n>
 
 <script>
+  import { KEYS } from '@/store'
   export default {
     props: {
       plans: {
@@ -46,11 +47,12 @@
       }
     },
     methods: {
-      selectPlan (Plan) {
-        this.selectedPlan = Plan
+      selectPlan (plan) {
+        this.selectedPlan = plan
         return this.$emit('changed', this.selectedPlan)
       },
-      submit (Plan) {
+      submit (plan) {
+        this.$store.commit(KEYS.MUTATIONS.SELECT_PLAN, { plan: this.selectedPlan })
         return this.$emit('completed', this.selectedPlan)
       }
     }
