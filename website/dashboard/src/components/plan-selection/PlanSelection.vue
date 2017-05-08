@@ -3,28 +3,22 @@
     :items="plans"
     @selected="selectPlan">
     <template scope="props">
+
       <v-card-title class="title">
         {{ props.item.title }}
       </v-card-title>
 
-      <v-card-title class="primary white--text">
+      <v-card-title class="price">
         <price
           :amount="props.item.price"
           :currency="props.item.currency">
         </price>
       </v-card-title>
 
-      <v-card-text>
-        <v-list two-line subheader>
-          <v-list-item v-for="(value, key) in props.item.metadata" :key="key">
-            <v-list-tile>
-              <v-list-tile-content>
-                <v-list-tile-title>{{ key }}</v-list-tile-title>
-                <v-list-tile-sub-title> {{ value }}</v-list-tile-sub-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list-item>
-        </v-list>
+      <v-card-text class="meta">
+        <p v-for="(value, key) in props.item.metadata" :key="key">
+          {{ key }} : <strong>{{ value }}</strong>
+        </p>
       </v-card-text>
     </template>
   </selectable-grid>
@@ -53,3 +47,21 @@
     }
   }
 </script>
+
+<style lang="stylus" scoped>
+  @import "../../variables";
+
+  .title,
+  .price {
+    justify-content: center;
+  }
+
+  .price {
+    background: rgba($theme.primary, .7);
+    color: #fff;
+  }
+
+  .meta {
+    text-align: center;
+  }
+</style>
