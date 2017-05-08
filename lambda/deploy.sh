@@ -11,8 +11,5 @@
   npm install -g serverless
 
   echo "## Deploying lambda ##"
-  echo $AWS_ACCESS_KEY_ID
-  echo $AWS_SECRET_ACCESS_KEY
-
   cd $LAMBDA_PATH && serverless deploy --stage $1
 #fi;
