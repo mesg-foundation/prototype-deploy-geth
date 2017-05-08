@@ -20,15 +20,15 @@
 </template>
 
 <i18n>
-{
-  "en": {
-    "title": "Reset Password",
-    "email": "Email",
-    "submit": "Reset my password",
-    "sent": "Email sent",
-    "success": "An email has been sent with the instructions to reset your password"
+  {
+    "en": {
+      "title": "Reset Password",
+      "email": "Email",
+      "submit": "Reset my password",
+      "sent": "Email sent",
+      "success": "An email has been sent with the instructions to reset your password"
+    }
   }
-}
 </i18n>
 
 <script>

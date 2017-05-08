@@ -5,11 +5,11 @@
 </template>
 
 <i18n>
-{
-  "en": {
+  {
+    "en": {
 
+    }
   }
-}
 </i18n>
 
 <script>

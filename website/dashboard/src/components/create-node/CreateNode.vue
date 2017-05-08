@@ -3,11 +3,11 @@
 </template>
 
 <i18n>
-{
-  "en": {
-    "title": "Create my node"
+  {
+    "en": {
+      "title": "Create my node"
+    }
   }
-}
 </i18n>
 
 <script>

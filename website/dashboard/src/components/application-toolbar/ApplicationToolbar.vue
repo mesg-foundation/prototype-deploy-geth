@@ -7,12 +7,12 @@
 </template>
 
 <i18n>
-{
-  "en": {
-    "title": "Dashboard",
-    "action": "Create a node"
+  {
+    "en": {
+      "title": "Dashboard",
+      "action": "Create a node"
+    }
   }
-}
 </i18n>
 
 <style lang="stylus" scoped>

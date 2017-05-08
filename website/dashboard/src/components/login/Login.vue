@@ -37,16 +37,16 @@
 </template>
 
 <i18n>
-{
-  "en": {
-    "title": "Login",
-    "email": "Email Address",
-    "password": "Password",
-    "submit": "Log In",
-    "forgot": "Forgot password ?",
-    "signup": "Signup now !"
+  {
+    "en": {
+      "title": "Login",
+      "email": "Email Address",
+      "password": "Password",
+      "submit": "Log In",
+      "forgot": "Forgot password ?",
+      "signup": "Signup now !"
+    }
   }
-}
 </i18n>
 
 <script>

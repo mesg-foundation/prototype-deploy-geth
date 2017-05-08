@@ -32,15 +32,15 @@
 </template>
 
 <i18n>
-{
-  "en": {
-    "title": "Sign Up",
-    "email": "Email Address",
-    "password": "Password",
-    "submit": "Sign Up",
-    "signup": "I alredy have an account !"
+  {
+    "en": {
+      "title": "Sign Up",
+      "email": "Email Address",
+      "password": "Password",
+      "submit": "Sign Up",
+      "signup": "I alredy have an account !"
+    }
   }
-}
 </i18n>
 
 <script>

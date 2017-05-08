@@ -33,30 +33,30 @@
 </template>
 
 <i18n>
-{
-  "en": {
-    "chain": {
-      "title": "Select chain",
-      "description": "This blockchain will be your distributed database",
-      "action": "Select my server"
-    },
-    "plan": {
-      "title": "Select your server",
-      "description": "The server will be the machine that process your blockchain",
-      "action": "Process to payment"
-    },
-    "payment": {
-      "title": "Payment",
-      "description": "Pay your new awesome EtherStellar Ethereum Node",
-      "action": "Pay now"
-    },
-    "creation": {
-      "title": "Creation of your server",
-      "description": "Your server is being created with your chain"
-    },
-    "submit": "Create my node"
+  {
+    "en": {
+      "chain": {
+        "title": "Select chain",
+        "description": "This blockchain will be your distributed database",
+        "action": "Select my server"
+      },
+      "plan": {
+        "title": "Select your server",
+        "description": "The server will be the machine that process your blockchain",
+        "action": "Process to payment"
+      },
+      "payment": {
+        "title": "Payment",
+        "description": "Pay your new awesome EtherStellar Ethereum Node",
+        "action": "Pay now"
+      },
+      "creation": {
+        "title": "Creation of your server",
+        "description": "Your server is being created with your chain"
+      },
+      "submit": "Create my node"
+    }
   }
-}
 </i18n>
 
 <script>
