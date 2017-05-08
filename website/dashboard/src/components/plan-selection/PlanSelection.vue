@@ -43,7 +43,7 @@
     },
     data () {
       return {
-        selectedPlan: null
+        selectedPlan: this.$store.state.newNode.plan
       }
     },
     methods: {

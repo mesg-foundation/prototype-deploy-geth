@@ -1,7 +1,7 @@
 <template>
   <v-stepper v-model="currentStep" vertical>
     <div v-for="step, i in steps" :key="step.id">
-      <v-stepper-step :step="step.id" :complete="currentStep > step.id">
+      <v-stepper-step :step="step.id" editable="editable" :complete="currentStep > step.id">
         {{ $t(`${step.key}.title`) }}
         <small v-if="withDescription">{{ $t(`${step.key}.description`) }}</small>
       </v-stepper-step>
@@ -73,7 +73,8 @@
       steps () { return this.$store.state.newNodeStepList },
       node () { return this.$store.state.newNode },
       chains () { return this.$store.state.chainList },
-      plans () { return this.$store.state.planList }
+      plans () { return this.$store.state.planList },
+      editable () { return this.currentStep < this.steps.length }
     }
   }
 </script>

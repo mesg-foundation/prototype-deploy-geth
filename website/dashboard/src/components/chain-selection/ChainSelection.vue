@@ -42,7 +42,7 @@
     },
     data () {
       return {
-        selectedChain: null
+        selectedChain: this.$store.state.newNode.chain
       }
     },
     methods: {
