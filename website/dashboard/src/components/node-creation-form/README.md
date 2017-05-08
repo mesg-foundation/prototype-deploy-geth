@@ -8,7 +8,7 @@
 
 | name | type | required | default |
 | ---- | ---- | -------- | ------- |
-| with-description | Boolean | false | false |
+| with-description | `Boolean` | false | `false` |
 
 ## Slots
 

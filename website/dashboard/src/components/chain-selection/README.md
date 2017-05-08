@@ -11,8 +11,8 @@
 
 | name | type | required | default |
 | ---- | ---- | -------- | ------- |
-| chains | Array<ChainInformation> | true | null |
-| actionTitle | String | false | "Select this chain" |
+| chains | `Array<ChainInformation>` | true | `null` |
+| actionTitle | `String` | false | `"Select this chain"` |
 
 **ChainInformation** should be an object with the properties:
   - **id** {String}: An Id to identify the chain

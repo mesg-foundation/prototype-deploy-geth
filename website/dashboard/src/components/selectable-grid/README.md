@@ -17,8 +17,8 @@
 
 | name | type | required | default |
 | ---- | ---- | -------- | ------- |
-| items | Array<SelectableObject> | true | null |
-| selectedClass | string | false | default | 'primary white--text' |
+| items | `Array<SelectableObject>` | true | `null` |
+| selectedClass | `String` | false | default | `'primary white--text'` |
 
 **SelectableObject** should be an object with at least the properties:
   - **id** {String}: An Id to identify the the item

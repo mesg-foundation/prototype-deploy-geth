@@ -11,8 +11,8 @@
 
 | name | type | required | default |
 | ---- | ---- | -------- | ------- |
-| plans | Array<PlanInformation> | true | null |
-| actionTitle | String | false | "Choose this plan" |
+| plans | `Array<PlanInformation>` | true | `null` |
+| actionTitle | `String` | false | `"Choose this plan"` |
 
 **PlanInformation** should be an object with the properties:
   - **id** {String}: An Id to identify the plan

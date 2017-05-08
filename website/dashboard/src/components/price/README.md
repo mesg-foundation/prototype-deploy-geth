@@ -14,10 +14,10 @@ will output
 
 | name | type | required | default |
 | ---- | ---- | -------- | ------- |
-| amount | Number | true | null |
-| currency | String | false | 'USD' |
-| prepend | Boolean | false | true |
-| decimals | Number | false | 2 |
+| amount | `Number` | true | `null` |
+| currency | `String` | false | `'USD'` |
+| prepend | `Boolean` | false | `true` |
+| decimals | `Number` | false | `2` |
 
 ## Slots
 

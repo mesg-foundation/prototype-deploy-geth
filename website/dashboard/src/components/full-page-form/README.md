@@ -15,7 +15,7 @@
 
 | name | type | required | default |
 | ---- | ---- | -------- | ------- |
-| title | String | false | null |
+| title | `String` | false | `null` |
 
 ## Slots
 
