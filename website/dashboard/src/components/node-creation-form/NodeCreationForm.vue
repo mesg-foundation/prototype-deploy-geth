@@ -1,7 +1,11 @@
 <template>
   <v-stepper v-model="currentStep" vertical>
-    <div v-for="step, i in steps" :key="step.id">
-      <v-stepper-step :step="step.id" editable="editable" :complete="currentStep > step.id">
+    <template v-for="step, i in steps">
+      <v-stepper-step
+        :key="step.id"
+        :step="step.id"
+        :editable="editable"
+        :complete="currentStep > step.id">
         {{ $t(`${step.key}.title`) }}
         <small v-if="withDescription">{{ $t(`${step.key}.description`) }}</small>
       </v-stepper-step>
@@ -24,7 +28,7 @@
           :chain="node.chain">
         </payment-form>
       </v-stepper-content>
-    </div>
+    </template>
   </v-stepper>
 </template>
 
