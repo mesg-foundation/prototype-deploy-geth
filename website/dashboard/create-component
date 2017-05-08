@@ -1,0 +1,55 @@
+#!/bin/bash
+
+component_name=$1
+component=$2
+component_path=./src/components
+
+mkdir $component_path/$component
+echo "## Usage
+
+\`\`\`html
+<$component></$component>
+\`\`\`
+
+## Props
+
+| name | type | required | default |
+| ---- | ---- | -------- | ------- |
+
+## Slots
+
+None
+
+## Events
+
+None
+
+" >> $component_path/$component/README.md
+
+echo "import $component_name from './$component_name.vue'
+
+export default $component_name
+" >> $component_path/$component/index.js
+
+echo "<template>
+  <div>
+  </div>
+</template>
+
+<i18n>
+{
+  \"en\": {
+
+  }
+}
+</i18n>
+
+<script>
+  export default {
+  }
+</script>
+
+<style lang=\"stylus\" scoped>
+  @import '../../variables'
+</style>
+" >> $component_path/$component/$component_name.vue
