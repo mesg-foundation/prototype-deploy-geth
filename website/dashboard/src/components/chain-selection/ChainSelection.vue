@@ -1,19 +1,21 @@
 <template>
   <div>
-    <v-card
-      v-for="chain in chains" :key="chain.id"
-      :class="{ primary: selectedChain && chain.id === selectedChain.id }"
-      @click="selectChain(chain)">
-      <v-card-title v-if="chain.name">
-        {{ chain.name }}
-      </v-card-title>
+    <selectable-grid
+      :items="chains"
+      @selected="selectChain">
 
-      <v-card-text v-if="chain.description">
-        {{ chain.description }}
-      </v-card-text>
-    </v-card>
+      <template scope="props">
+        <v-card-title v-if="props.item.name">
+          {{ props.item.name }}
+        </v-card-title>
 
-    <v-btn primary :disabled="!selectedChain" @click.native="submit">
+        <v-card-text v-if="props.item.description">
+          {{ props.item.description }}
+        </v-card-text>
+      </template>
+    </selectable-grid>
+
+    <v-btn class="ma-1 mt-3" primary :disabled="!selectedChain" @click.native="submit">
       {{ this.actionTitle || $t('defaultActionTitle') }}
     </v-btn>
   </div>
@@ -29,7 +31,11 @@
 
 <script>
   import { KEYS } from '@/store'
+  import SelectableGrid from '@/components/selectable-grid'
   export default {
+    components: {
+      SelectableGrid
+    },
     props: {
       chains: {
         type: Array,
