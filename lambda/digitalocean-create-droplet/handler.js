@@ -10,9 +10,10 @@ var DigitalOcean = new DigitalOceanWrapper(process.env.ES_DIGITALOCEAN_KEY, 25)
  */
 const userDataScript = (subscriptionId) => {
   const endpoint = ES_SERVER_SCRIPT_SETUP_ENDPOINT
+  const endpoint_droplet_created = ES_ENDPOINT_DROPLET_CREATED
   const token = process.env.ES_GITLAB_KEY
   return `#!/bin/bash
-curl --request GET --header "PRIVATE-TOKEN: ${token}" "${endpoint}" | sh -s ${subscriptionId}`
+curl --request GET --header "PRIVATE-TOKEN: ${token}" "${endpoint}" | sh -s ${subscriptionId} ${endpoint_droplet_created}`
 }
 
 /**
