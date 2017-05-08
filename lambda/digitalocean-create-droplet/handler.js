@@ -35,34 +35,27 @@ const subscription = event => params(event).data.object
  */
 const sshKeys = () => process.env.ES_SSH_KEYS.split(",")
 
+const dropletConfig = subscription => {
+  return {
+    "name": `Node ${subscription.plan.metadata.region} ${subscription.plan.metadata.size} ${subscription.id} ${subscription.customer}`,
+    "region": subscription.plan.metadata.region,
+    "size": subscription.plan.metadata.size,
+    "image": "docker",
+    "ssh_keys": sshKeys(),
+    "user_data": userDataScript(subscription.id),
+    "ipv6": true,
+    "monitoring": true,
+  }
+}
+
 /**
  * Serverless handler
  * This function will create a new droplet on DigitalOCean
  */
 module.exports.createDroplet = (event, context, callback) => {
-  const subscription = subscription(event)
-  const customerId = subscription.customer
-  const subscriptionId = subscription.id
-  const plan = subscription.plan
-  const planId = plan.id
-  const size = plan.metadata.size
-  const region = plan.metadata.region
-  const sshKeys = sshKeys()
-  const userDataScript = userDataScript(subscriptionId)
-  const image = "docker"
-  const name = `Node ${region} ${size} ${subscriptionId} ${customerId}`
-
   // Create droplet
-  DigitalOcean.dropletsCreate({
-    "name": name,
-    "region": region,
-    "size": size,
-    "image": image,
-    "ssh_keys": sshKeys,
-    "user_data": userDataScript,
-    "ipv6": true,
-    "monitoring": true,
-  })
+  const config = dropletConfig(subscription(event))
+  DigitalOcean.dropletsCreate(config)
   .then ( _ => {
     callback(null, {
       statusCode: 200,
