@@ -12,11 +12,12 @@ const userDataScript = (subscriptionId) => {
   const endpoint = process.env.ES_SERVER_SCRIPTS_ARCHIVE_ENDPOINT
   const endpoint_droplet_created = process.env.ES_ENDPOINT_DROPLET_CREATED
   const token = process.env.ES_GITLAB_KEY
+  const logFile = "/root/ES.log"
   return `#!/bin/bash
-apt-get install unzip
-wget --header "PRIVATE-TOKEN: ${token}" -O /root/archive.zip ${endpoint}
-unzip -o /root/archive.zip -d /root
-/root/server-scripts/setup.sh ${subscriptionId} ${endpoint_droplet_created}
+apt-get install unzip &>> ${logFile}
+wget --header "PRIVATE-TOKEN: ${token}" -O /root/archive.zip ${endpoint} &>> ${logFile}
+unzip -o /root/archive.zip -d /root &>> ${logFile}
+/root/server-scripts/setup.sh ${subscriptionId} ${endpoint_droplet_created} &>> ${logFile}
 `
 }
 
