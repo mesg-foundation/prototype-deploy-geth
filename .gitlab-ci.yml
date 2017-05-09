@@ -22,11 +22,13 @@ variables:
   ETHERSTELLAR_IO_BUCKET_NAME_DEVELOPMENT: development.etherstellar.io
   ETHERSTELLAR_IO_BUCKET_NAME_PRODUCTION: etherstellar.io
 
+  SERVER_SCRIPTS_PATH: server-scripts
+
 # Lambda
-deploy lambda development:
+deploy-lambda-development:
   stage: deploy
   variables:
-    ES_SERVER_SCRIPT_SETUP_ENDPOINT: $ES_SERVER_SCRIPT_SETUP_ENDPOINT_DEVELOPMENT
+    ES_SERVER_SCRIPTS_ARCHIVE_ENDPOINT: $ES_SERVER_SCRIPTS_ARCHIVE_ENDPOINT_DEVELOPMENT
     ES_ENDPOINT_DROPLET_CREATED: $ES_ENDPOINT_DROPLET_CREATED_DEVELOPMENT
   script:
     - sh $LAMBDA_PATH/deploy.sh development
@@ -35,10 +37,10 @@ deploy lambda development:
   environment:
     name: lambda-development
 
-deploy lambda production:
+deploy-lambda-production:
   stage: deploy
   variables:
-    ES_SERVER_SCRIPT_SETUP_ENDPOINT: $ES_SERVER_SCRIPT_SETUP_ENDPOINT_PRODUCTION
+    ES_SERVER_SCRIPTS_ARCHIVE_ENDPOINT: $ES_SERVER_SCRIPTS_ARCHIVE_ENDPOINT_PRODUCTION
     ES_ENDPOINT_DROPLET_CREATED: $ES_ENDPOINT_DROPLET_CREATED_PRODUCTION
   script:
     - sh $LAMBDA_PATH/deploy.sh production
@@ -48,7 +50,7 @@ deploy lambda production:
     name: lambda-production
 
 # Dashboard
-deploy dashboard development:
+deploy-dashboard-development:
   image: noxan/docker-node-awscli-yarn
   stage: deploy
   variables:
@@ -60,7 +62,7 @@ deploy dashboard development:
   environment:
     name: dashboard-development
 
-deploy dashboard production:
+deploy-dashboard-production:
   image: noxan/docker-node-awscli-yarn
   stage: deploy
   variables:
@@ -72,8 +74,33 @@ deploy dashboard production:
   environment:
     name: dashboard-production
 
+# Server scripts
+deploy-server-scripts-development:
+  stage: deploy
+  artifacts:
+    paths:
+      - $SERVER_SCRIPTS_PATH
+  script:
+    - echo "Nothing to do"
+  only:
+   - development
+  environment:
+    name: server-scripts-development
+
+deploy-server-scripts-production:
+  stage: deploy
+  artifacts:
+    paths:
+      - $SERVER_SCRIPTS_PATH
+  script:
+    - echo "Nothing to do"
+  only:
+   - master
+  environment:
+    name: server-scripts-production
+
 # Etherstellar.io
-# deploy etherstellar.io development:
+# deploy-etherstellar.io-development:
 #   image: noxan/docker-node-awscli-yarn
 #   stage: deploy
 #   variables:
@@ -85,7 +112,7 @@ deploy dashboard production:
 #   environment:
 #     name: etherstellar.io-development
 #
-# deploy etherstellar.io production:
+# deploy-etherstellar.io-production:
 #   image: noxan/docker-node-awscli-yarn
 #   stage: deploy
 #   variables:

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source /root/server-scripts/.es.env
+
 ES_PARITY_VERSION=nightly
 
 # Launch full parity
