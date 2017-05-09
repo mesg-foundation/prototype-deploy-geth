@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source /root/server-scripts/.es.env
+
 # Launch full parity
 docker run \
   -d \
