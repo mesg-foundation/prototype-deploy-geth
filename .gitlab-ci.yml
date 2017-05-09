@@ -25,7 +25,7 @@ variables:
   SERVER_SCRIPTS_PATH: server-scripts
 
 # Lambda
-deploy lambda development:
+deploy-lambda-development:
   stage: deploy
   variables:
     ES_SERVER_SCRIPTS_ARCHIVE_ENDPOINT: $ES_SERVER_SCRIPTS_ARCHIVE_ENDPOINT_DEVELOPMENT
@@ -37,7 +37,7 @@ deploy lambda development:
   environment:
     name: lambda-development
 
-deploy lambda production:
+deploy-lambda-production:
   stage: deploy
   variables:
     ES_SERVER_SCRIPTS_ARCHIVE_ENDPOINT: $ES_SERVER_SCRIPTS_ARCHIVE_ENDPOINT_PRODUCTION
@@ -50,7 +50,7 @@ deploy lambda production:
     name: lambda-production
 
 # Dashboard
-deploy dashboard development:
+deploy-dashboard-development:
   image: noxan/docker-node-awscli-yarn
   stage: deploy
   variables:
@@ -62,7 +62,7 @@ deploy dashboard development:
   environment:
     name: dashboard-development
 
-deploy dashboard production:
+deploy-dashboard-production:
   image: noxan/docker-node-awscli-yarn
   stage: deploy
   variables:
@@ -100,7 +100,7 @@ deploy-server-scripts-production:
     name: server-scripts-production
 
 # Etherstellar.io
-# deploy etherstellar.io development:
+# deploy-etherstellar.io-development:
 #   image: noxan/docker-node-awscli-yarn
 #   stage: deploy
 #   variables:
@@ -112,7 +112,7 @@ deploy-server-scripts-production:
 #   environment:
 #     name: etherstellar.io-development
 #
-# deploy etherstellar.io production:
+# deploy-etherstellar.io-production:
 #   image: noxan/docker-node-awscli-yarn
 #   stage: deploy
 #   variables:
