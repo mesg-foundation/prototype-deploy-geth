@@ -14,6 +14,9 @@ export ES_STRIPE_SUBSCRIPTION_ID=$ES_STRIPE_SUBSCRIPTION_ID
 export ES_ENDPOINT_DROPLET_CREATED=$ES_ENDPOINT_DROPLET_CREATED
 " >> /root/.bashrc
 
+# Install stuff
+sh $ES_SCRIPTS_PATH/install.sh
+
 # Install parity
 sh $ES_SCRIPTS_PATH/parity/install.sh
 
