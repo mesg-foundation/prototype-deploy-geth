@@ -71,7 +71,7 @@ module.exports.updateMetaData = (event, context, callback) => {
   const serverData = {
     ip: params.ip,
     servername: params.servername,
-    parity-signer-tokens: [
+    "parity-signer-tokens": [
       params["parity-signer-token"],
     ],
   };
