@@ -23,7 +23,7 @@ variables:
   ETHERSTELLAR_IO_BUCKET_NAME_PRODUCTION: etherstellar.io
 
   SERVER_SCRIPTS_PATH: server-scripts
-  SERVER_SCRIPTS_ARTIFACTS_FILES: $SERVER_SCRIPTS_PATH/*.sh
+  SERVER_SCRIPTS_ARTIFACTS_FILES: $SERVER_SCRIPTS_PATH/**/*.sh
 
 # Lambda
 deploy lambda development:
