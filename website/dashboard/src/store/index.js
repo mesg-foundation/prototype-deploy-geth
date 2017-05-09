@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Firebase from 'firebase'
+import Actions from './actions'
 
 Vue.use(Vuex)
 
@@ -8,13 +8,16 @@ export const KEYS = {
   ACTIONS: {
     SIGNIN: 'SIGNIN',
     SIGNUP: 'SIGNUP',
-    SEND_RESET_PASSWORD_MAIL: 'SEND_RESET_PASSWORD_MAIL'
+    SEND_RESET_PASSWORD_MAIL: 'SEND_RESET_PASSWORD_MAIL',
+    PAY_NODE: 'PAY_NODE'
   },
   MUTATIONS: {
     SET_USER: 'SET_USER',
     CONNECTED: 'CONNECTED',
     SELECT_CHAIN: 'SELECT_CHAIN',
-    SELECT_PLAN: 'SELECT_PLAN'
+    SELECT_PLAN: 'SELECT_PLAN',
+    PAYMENT_IN_PROGRESS: 'PAYMENT_IN_PROGRESS',
+    PAYMENT_ERROR: 'PAYMENT_ERROR'
   }
 }
 
@@ -27,21 +30,17 @@ export default new Vuex.Store({
     newNode: {
       plan: null,
       chain: null
+    },
+    payment: {
+      inProgress: false,
+      error: null
     }
   },
   actions: {
-    [KEYS.ACTIONS.SIGNUP] (_, { email, password }) {
-      return Firebase.auth()
-      .createUserWithEmailAndPassword(email, password)
-    },
-    [KEYS.ACTIONS.SIGNIN] (_, { email, password }) {
-      return Firebase.auth()
-      .signInWithEmailAndPassword(email, password)
-    },
-    [KEYS.ACTIONS.SEND_RESET_PASSWORD_MAIL] (_, { email }) {
-      return Firebase.auth()
-      .sendPasswordResetEmail(email)
-    }
+    [KEYS.ACTIONS.SIGNUP]: Actions.session.signup,
+    [KEYS.ACTIONS.SIGNIN]: Actions.session.signin,
+    [KEYS.ACTIONS.SEND_RESET_PASSWORD_MAIL]: Actions.session.sendResetPassword,
+    [KEYS.ACTIONS.PAY_NODE]: Actions.payment.pay
   },
   mutations: {
     [KEYS.MUTATIONS.SET_USER] (state, value) {
@@ -55,6 +54,12 @@ export default new Vuex.Store({
     },
     [KEYS.MUTATIONS.SELECT_PLAN] (state, { plan }) {
       state.newNode = { ...state.newNode, plan }
+    },
+    [KEYS.MUTATIONS.PAYMENT_IN_PROGRESS] (state, { inProgress }) {
+      state.payment.inProgress = inProgress
+    },
+    [KEYS.MUTATIONS.PAYMENT_ERROR] (state, { error }) {
+      state.payment.error = error
     }
   }
 })
