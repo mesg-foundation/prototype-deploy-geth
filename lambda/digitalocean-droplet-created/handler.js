@@ -66,6 +66,9 @@ const notifyTeamBySlack = (customer, subscription, serverData) => {
  * then notify the customer and the team
  */
 module.exports.updateMetaData = (event, context, callback) => {
+
+  console.log(event.body)
+
   const params = extractParams(event);
   const subscriptionId = params["subscription-id"];
   delete params["subscription-id"]
