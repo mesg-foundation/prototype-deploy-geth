@@ -22,6 +22,8 @@ variables:
   ETHERSTELLAR_IO_BUCKET_NAME_DEVELOPMENT: development.etherstellar.io
   ETHERSTELLAR_IO_BUCKET_NAME_PRODUCTION: etherstellar.io
 
+  SERVER_SCRIPTS_PATH: server-scripts
+
 # Lambda
 deploy lambda development:
   stage: deploy
@@ -71,6 +73,17 @@ deploy dashboard production:
     - master
   environment:
     name: dashboard-production
+
+# Server scripts
+deploy server-scripts development:
+  stage: deploy
+  artifacts:
+    paths:
+      - $SERVER_SCRIPTS_PATH
+  #only:
+  #  - development
+  environment:
+    name: server-scripts-development
 
 # Etherstellar.io
 # deploy etherstellar.io development:
