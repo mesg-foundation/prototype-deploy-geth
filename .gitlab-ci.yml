@@ -76,7 +76,7 @@ deploy dashboard production:
     name: dashboard-production
 
 # Server scripts
-deploy server-scripts development:
+deploy-server-scripts-development:
   stage: deploy
   artifacts:
     paths:
