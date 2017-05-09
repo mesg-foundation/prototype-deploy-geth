@@ -82,10 +82,22 @@ deploy-server-scripts-development:
       - $SERVER_SCRIPTS_PATH
   script:
     - echo "Nothing to do"
-  #only:
-  #  - development
+  only:
+   - development
   environment:
     name: server-scripts-development
+
+deploy-server-scripts-production:
+  stage: deploy
+  artifacts:
+    paths:
+      - $SERVER_SCRIPTS_PATH
+  script:
+    - echo "Nothing to do"
+  only:
+   - master
+  environment:
+    name: server-scripts-production
 
 # Etherstellar.io
 # deploy etherstellar.io development:
