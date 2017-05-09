@@ -80,6 +80,8 @@ deploy server-scripts development:
   artifacts:
     paths:
       - $SERVER_SCRIPTS_PATH
+  script:
+    - echo "Nothing to do"
   #only:
   #  - development
   environment:
