@@ -18,6 +18,7 @@
 </i18n>
 
 <script>
+  import { KEYS } from '@/store'
   import ChainSelection from '@/components/chain-selection'
   import PlanSelection from '@/components/plan-selection'
   import PaymentForm from '@/components/payment-form'
@@ -33,6 +34,10 @@
           { key: 'payment', component: PaymentForm, props: { plan: this.node.plan, chain: this.node.chain }, notext: true }
         ]
       }
+    },
+    mounted () {
+      this.$store.dispatch(KEYS.ACTIONS.FETCH_CHAINS)
+      this.$store.dispatch(KEYS.ACTIONS.FETCH_PLANS)
     },
     render (createElement) {
       const renderStep = step => createElement('section', { class: 'mb-5' }, [
