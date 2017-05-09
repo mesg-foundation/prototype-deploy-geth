@@ -68,22 +68,16 @@ const notifyTeamBySlack = (customer, subscription, serverData) => {
 module.exports.updateMetaData = (event, context, callback) => {
   const params = extractParams(event);
   const subscriptionId = params["subscription-id"];
-  const serverData = {
-    ip: params.ip,
-    servername: params.servername,
-    "parity-signer-tokens": [
-      params["parity-signer-token"],
-    ],
-  };
+  delete params["subscription-id"]
 
   let subscription = null;
 
-  updateSubscriptionMetaData(subscriptionId, serverData)
+  updateSubscriptionMetaData(subscriptionId, params)
   .then(fetchedSubscription => subscription = fetchedSubscription)
   .then(() => extractCustomerInformations(subscription))
   .then(customer => Promise.all([
-    notifyCustomerByEmail(customer, subscription, serverData),
-    notifyTeamBySlack(customer, subscription, serverData),
+    notifyCustomerByEmail(customer, subscription, params),
+    notifyTeamBySlack(customer, subscription, params),
   ]))
   .then(() => callback(null, successResponse))
   .catch(e => {
