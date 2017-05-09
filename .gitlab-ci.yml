@@ -23,7 +23,6 @@ variables:
   ETHERSTELLAR_IO_BUCKET_NAME_PRODUCTION: etherstellar.io
 
   SERVER_SCRIPTS_PATH: server-scripts
-  SERVER_SCRIPTS_ARTIFACTS_FILES: $SERVER_SCRIPTS_PATH/**/*.sh
 
 # Lambda
 deploy lambda development:
@@ -80,7 +79,7 @@ deploy-server-scripts-development:
   stage: deploy
   artifacts:
     paths:
-      - $SERVER_SCRIPTS_ARTIFACTS_FILES
+      - $SERVER_SCRIPTS_PATH
   script:
     - echo "Nothing to do"
   #only:
