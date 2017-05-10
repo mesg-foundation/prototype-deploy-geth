@@ -2,7 +2,6 @@
 
 var DigitalOceanWrapper = require('do-wrapper')
 var DigitalOcean = new DigitalOceanWrapper(process.env.ES_DIGITALOCEAN_KEY, 25)
-var slug = require('slug')
 
 /**
  * Call the callback with a success respond that return the customer
