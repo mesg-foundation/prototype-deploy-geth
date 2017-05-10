@@ -8,20 +8,25 @@ const Http = require('axios');
  * @param {Object} customer - https://stripe.com/docs/api#customers
  * @param {Function} callback - Callback for lambda
  */
-const success = (customer, callback) => callback(null, {
-  statusCode: 200,
-  body: JSON.stringify(customer)
-});
+const success = (customer, callback) => {
+  callback(null, {
+    statusCode: 200,
+    body: JSON.stringify(customer)
+  })
+};
 
 /**
  * Call the callback with an error respond that contains the error
  * @param {Error} error - Error triggered
  * @param {Function} callback - Callback for lambda
  */
-const error = (error, callback) => callback(null, {
-  statusCode: 400,
-  body: JSON.stringify(error)
-});
+const error = (error, callback) => {
+  console.log(JSON.stringify(error))
+  callback(null, {
+    statusCode: 400,
+    body: JSON.stringify(error)
+  })
+}
 
 /**
  * Get the Stripe customer object based on the subscription
