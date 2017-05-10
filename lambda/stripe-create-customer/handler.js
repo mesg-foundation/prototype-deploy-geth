@@ -28,13 +28,12 @@ const successResponse = subscription => ({
  * @param {*} event - The event sent by serverless
  * @return the promise for the creation of the Stripe customer
  */
-const createCustomer = event => {
-  const data = JSON.parse(event.body);
+const createCustomer = data => {
   const customerData = {
     source: data.stripeToken,
     email: data.stripeEmail,
     metadata: {
-      firebase_id: data.userId
+      firebase_id: data.user.id
     }
   };
   return stripe.customers.create(customerData)
@@ -48,10 +47,10 @@ const createCustomer = event => {
  * @param {String} planId - Id of the plan to subscribe (https://dashboard.stripe.com/test/plans)
  * @return the promise of the creation of the Stripe subscription
  */
-const createSubscription = (event, customer, planId) => {
+const createSubscription = (data, customer) => {
   const subscriptionData = {
     customer: customer.id,
-    plan: planId,
+    plan: data.plan.id,
   };
   return stripe.subscriptions.create(subscriptionData)
   .catch(err400)
@@ -64,8 +63,9 @@ const createSubscription = (event, customer, planId) => {
  * the error
  */
 module.exports.createCustomer = (event, context, callback) => {
+  const data = JSON.parse(event.body);
   createCustomer(event)
-  .then(customer => createSubscription(event, customer, process.env.ES_DEFAULT_PLAN_ID))
+  .then(customer => createSubscription(event, customer))
   .then(subscription => callback(null, successResponse(subscription)))
   .catch(error => callback(error));
 };
