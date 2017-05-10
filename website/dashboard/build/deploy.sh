@@ -9,7 +9,7 @@
   cd $CI_PROJECT_DIR
 
   echo "## Build dashboard ##"
-  npm --prefix $DASHBOARD_PATH run build
+  npm --prefix $DASHBOARD_PATH run build:$1
 
   echo "## Deploying dist folder to s3 ##"
   aws s3 sync $DASHBOARD_DIST_PATH s3://$DASHBOARD_BUCKET_NAME --acl public-read
