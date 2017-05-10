@@ -18,10 +18,14 @@ const success = (callback) => callback(null, {
  * @param {Error} error - Error triggered
  * @param {Function} callback - Callback for lambda
  */
-const error = (error, callback) => callback(null, {
-  statusCode: 400,
-  body: JSON.stringify(error)
-});
+const error = (e, callback) => {
+  const body = JSON.stringify(e.message ? { error: e.message } : e)
+  console.log(body)
+  callback(null, {
+    statusCode: 400,
+    body
+  })
+}
 
 /**
  * Create the user data script that the server will run on first start

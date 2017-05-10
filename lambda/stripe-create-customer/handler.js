@@ -21,10 +21,14 @@ const success = (subscription, callback) => callback(null, {
  * @param {Error} error - Error triggered
  * @param {Function} callback - Callback for lambda
  */
-const error = (error, callback) => callback(null, {
-  statusCode: 400,
-  body: JSON.stringify(error)
-});
+const error = (e, callback) => {
+  const body = JSON.stringify(e.message ? { error: e.message } : e)
+  console.log(body)
+  callback(null, {
+    statusCode: 400,
+    body
+  })
+}
 
 /**
  * Create a Stripe customer based on the stipeToken and stripeEmail
