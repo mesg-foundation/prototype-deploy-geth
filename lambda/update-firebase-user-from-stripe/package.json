@@ -4,6 +4,8 @@
   "description": "",
   "main": "handler.js",
   "dependencies": {
+    "axios": "^0.16.1",
+    "stripe": "^4.18.0"
   },
   "devDependencies": {},
   "scripts": {
