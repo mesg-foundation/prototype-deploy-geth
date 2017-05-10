@@ -50,6 +50,7 @@
           plan: this.plan,
           chain: this.chain
         })
+        .then(() => this.$router.push({ name: 'Nodes' }))
       }
     }
   }
