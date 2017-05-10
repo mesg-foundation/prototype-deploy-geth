@@ -18,13 +18,10 @@ const success = (customer, callback) => callback(null, {
  * @param {Error} error - Error triggered
  * @param {Function} callback - Callback for lambda
  */
-const error = (error, callback) => {
-  console.log(error);
-  return callback(null, {
-    statusCode: 400,
-    body: JSON.stringify(error)
-  });
-};
+const error = (error, callback) => callback(null, {
+  statusCode: 400,
+  body: JSON.stringify(error)
+});
 
 /**
  * Get the Stripe customer object based on the subscription

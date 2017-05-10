@@ -3,25 +3,28 @@
 const stripe = require('stripe')(process.env.ES_STRIPE_SECRET_KEY);
 
 /**
- * Handler for error 400
- * @param {Object} error
- * @return a response object with the error and a 400 status code
- */
-const err400 = error => ({ statusCode: 400, body: JSON.stringify(error) })
-
-/**
  * Return a success response when the subscription has been created
- * @param {Object}: subscription - https://stripe.com/docs/api#subscriptions
- * @return a response object with the subscription and a 201 status code
+ * @param {Object} customer - https://stripe.com/docs/api#customers
+ * @param {Function} callback - Callback for lambda
  */
-const successResponse = subscription => ({
+const success = (subscription, callback) => callback(null, {
   statusCode: 201,
   headers: {
     "Access-Control-Allow-Origin" : "*",
     "Access-Control-Allow-Credentials" : true
   },
   body: JSON.stringify(subscription)
-})
+});
+
+/**
+ * Call the callback with an error respond that contains the error
+ * @param {Error} error - Error triggered
+ * @param {Function} callback - Callback for lambda
+ */
+const error = (error, callback) => callback(null, {
+  statusCode: 400,
+  body: JSON.stringify(error)
+});
 
 /**
  * Create a Stripe customer based on the stipeToken and stripeEmail
@@ -37,7 +40,6 @@ const createCustomer = data => {
     }
   };
   return stripe.customers.create(customerData)
-  .catch(err400)
 }
 
 /**
@@ -53,7 +55,6 @@ const createSubscription = (data, customer) => {
     plan: data.plan.id,
   };
   return stripe.subscriptions.create(subscriptionData)
-  .catch(err400)
 }
 
 /**
@@ -66,6 +67,6 @@ module.exports.createCustomer = (event, context, callback) => {
   const data = JSON.parse(event.body);
   createCustomer(event)
   .then(customer => createSubscription(event, customer))
-  .then(subscription => callback(null, successResponse(subscription)))
-  .catch(error => callback(error));
+  .then(subscription => success(subscription, callback))
+  .catch(e => error(error, callback))
 };

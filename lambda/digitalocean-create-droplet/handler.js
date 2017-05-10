@@ -4,6 +4,26 @@ var DigitalOceanWrapper = require('do-wrapper')
 var DigitalOcean = new DigitalOceanWrapper(process.env.ES_DIGITALOCEAN_KEY, 25)
 
 /**
+ * Call the callback with a success respond that return the customer
+ * @param {Object} customer - https://stripe.com/docs/api#customers
+ * @param {Function} callback - Callback for lambda
+ */
+const success = (callback) => callback(null, {
+  statusCode: 200,
+  body: JSON.stringify(null)
+});
+
+/**
+ * Call the callback with an error respond that contains the error
+ * @param {Error} error - Error triggered
+ * @param {Function} callback - Callback for lambda
+ */
+const error = (error, callback) => callback(null, {
+  statusCode: 400,
+  body: JSON.stringify(error)
+});
+
+/**
  * Create the user data script that the server will run on first start
  * @param {String} subscriptionId - Stripe subscription id
  * @return The script
@@ -62,16 +82,6 @@ module.exports.createDroplet = (event, context, callback) => {
   // Create droplet
   const config = dropletConfig(subscription(event))
   DigitalOcean.dropletsCreate(config)
-  .then ( _ => {
-    callback(null, {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: 'Droplet created'
-      })
-    })
-  })
-  .catch( error => {
-    console.log(error)
-    callback(JSON.stringify(error))
-  })
+  .then (() => success(callback))
+  .catch(e => error(e, callback))
 }
