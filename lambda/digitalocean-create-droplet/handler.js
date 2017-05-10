@@ -67,7 +67,7 @@ const sshKeys = () => process.env.ES_SSH_KEYS.split(",")
 
 const dropletConfig = subscription => {
   return {
-    "name": `Node ${subscription.plan.metadata.region} ${subscription.plan.metadata.size} ${subscription.id} ${subscription.customer}`,
+    "name": `Node-${subscription.plan.metadata.region}-${subscription.plan.metadata.size}-${subscription.id}-${subscription.customer}`,
     "region": subscription.plan.metadata.region,
     "size": subscription.plan.metadata.size,
     "image": "docker",
