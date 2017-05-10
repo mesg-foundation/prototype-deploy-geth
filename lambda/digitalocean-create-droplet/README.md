@@ -11,9 +11,3 @@ serverless invoke local --function digitalocean-create-droplet --path digitaloce
 ```console
 serverless invoke local --function digitalocean-create-droplet-get-image-list
 ```
-
-## Deploy in dev
-
-```console
-serverless deploy --stage dev
-```
