@@ -17,7 +17,6 @@
   },
   "homepage": "https://gitlab.com/etherstellar/etherstellar",
   "dependencies": {
-    "do-wrapper": "^3.11.1",
-    "slug": "^0.9.1"
+    "do-wrapper": "^3.11.1"
   }
 }
