@@ -67,18 +67,22 @@ const subscription = event => params(event).data.object
 const sshKeys = () => process.env.ES_SSH_KEYS.split(",")
 
 const dropletConfig = subscription => {
-  const name = slug(`Node ${subscription.plan.metadata.region} ${subscription.plan.metadata.size} ${subscription.id} ${subscription.customer}`, {
-    lowercase: false,
-  })
+  const name = [
+    "Node",
+    subscription.plan.metadata.region,
+    subscription.plan.metadata.size,
+    subscription.id,
+    subscription.customer
+  ].join("-").replace(/_/g, ".")
   return {
     name,
-    "region": subscription.plan.metadata.region,
-    "size": subscription.plan.metadata.size,
-    "image": "docker",
-    "ssh_keys": sshKeys(),
-    "user_data": userDataScript(subscription.id),
-    "ipv6": true,
-    "monitoring": true,
+    region: subscription.plan.metadata.region,
+    size: subscription.plan.metadata.size,
+    image: "docker",
+    ssh_keys: sshKeys(),
+    user_data: userDataScript(subscription.id),
+    ipv6: true,
+    monitoring: true,
   }
 }
 
