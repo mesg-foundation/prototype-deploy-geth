@@ -2,6 +2,7 @@
 
 var DigitalOceanWrapper = require('do-wrapper')
 var DigitalOcean = new DigitalOceanWrapper(process.env.ES_DIGITALOCEAN_KEY, 25)
+var slug = require('slug')
 
 /**
  * Call the callback with a success respond that return the customer
@@ -66,8 +67,11 @@ const subscription = event => params(event).data.object
 const sshKeys = () => process.env.ES_SSH_KEYS.split(",")
 
 const dropletConfig = subscription => {
+  const name = slug(`Node ${subscription.plan.metadata.region} ${subscription.plan.metadata.size} ${subscription.id} ${subscription.customer}`, {
+    lowercase: false,
+  })
   return {
-    "name": `Node-${subscription.plan.metadata.region}-${subscription.plan.metadata.size}-${subscription.id}-${subscription.customer}`,
+    name,
     "region": subscription.plan.metadata.region,
     "size": subscription.plan.metadata.size,
     "image": "docker",
