@@ -3,42 +3,47 @@
 const stripe = require('stripe')(process.env.ES_STRIPE_SECRET_KEY);
 
 /**
- * Handler for error 400
- * @param {Object} error
- * @return a response object with the error and a 400 status code
- */
-const err400 = error => ({ statusCode: 400, body: JSON.stringify(error) })
-
-/**
  * Return a success response when the subscription has been created
- * @param {Object}: subscription - https://stripe.com/docs/api#subscriptions
- * @return a response object with the subscription and a 201 status code
+ * @param {Object} customer - https://stripe.com/docs/api#customers
+ * @param {Function} callback - Callback for lambda
  */
-const successResponse = subscription => ({
+const success = (subscription, callback) => callback(null, {
   statusCode: 201,
   headers: {
     "Access-Control-Allow-Origin" : "*",
     "Access-Control-Allow-Credentials" : true
   },
   body: JSON.stringify(subscription)
-})
+});
+
+/**
+ * Call the callback with an error respond that contains the error
+ * @param {Error} error - Error triggered
+ * @param {Function} callback - Callback for lambda
+ */
+const error = (e, callback) => {
+  const body = JSON.stringify(e.message ? { error: e.message } : e)
+  console.log(body)
+  callback(null, {
+    statusCode: 400,
+    body
+  })
+}
 
 /**
  * Create a Stripe customer based on the stipeToken and stripeEmail
  * @param {*} event - The event sent by serverless
  * @return the promise for the creation of the Stripe customer
  */
-const createCustomer = event => {
-  const data = JSON.parse(event.body);
+const createCustomer = data => {
   const customerData = {
     source: data.stripeToken,
     email: data.stripeEmail,
     metadata: {
-      firebase_id: data.userId
+      firebase_id: data.user.id
     }
   };
   return stripe.customers.create(customerData)
-  .catch(err400)
 }
 
 /**
@@ -48,13 +53,12 @@ const createCustomer = event => {
  * @param {String} planId - Id of the plan to subscribe (https://dashboard.stripe.com/test/plans)
  * @return the promise of the creation of the Stripe subscription
  */
-const createSubscription = (event, customer, planId) => {
+const createSubscription = (data, customer) => {
   const subscriptionData = {
     customer: customer.id,
-    plan: planId,
+    plan: data.plan.id,
   };
   return stripe.subscriptions.create(subscriptionData)
-  .catch(err400)
 }
 
 /**
@@ -64,8 +68,9 @@ const createSubscription = (event, customer, planId) => {
  * the error
  */
 module.exports.createCustomer = (event, context, callback) => {
+  const data = JSON.parse(event.body);
   createCustomer(event)
-  .then(customer => createSubscription(event, customer, process.env.ES_DEFAULT_PLAN_ID))
-  .then(subscription => callback(null, successResponse(subscription)))
-  .catch(error => callback(error));
+  .then(customer => createSubscription(event, customer))
+  .then(subscription => success(subscription, callback))
+  .catch(e => error(error, callback))
 };

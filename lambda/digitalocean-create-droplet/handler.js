@@ -4,6 +4,30 @@ var DigitalOceanWrapper = require('do-wrapper')
 var DigitalOcean = new DigitalOceanWrapper(process.env.ES_DIGITALOCEAN_KEY, 25)
 
 /**
+ * Call the callback with a success respond that return the customer
+ * @param {Object} customer - https://stripe.com/docs/api#customers
+ * @param {Function} callback - Callback for lambda
+ */
+const success = (callback) => callback(null, {
+  statusCode: 200,
+  body: JSON.stringify(null)
+});
+
+/**
+ * Call the callback with an error respond that contains the error
+ * @param {Error} error - Error triggered
+ * @param {Function} callback - Callback for lambda
+ */
+const error = (e, callback) => {
+  const body = JSON.stringify(e.message ? { error: e.message } : e)
+  console.log(body)
+  callback(null, {
+    statusCode: 400,
+    body
+  })
+}
+
+/**
  * Create the user data script that the server will run on first start
  * @param {String} subscriptionId - Stripe subscription id
  * @return The script
@@ -42,15 +66,22 @@ const subscription = event => params(event).data.object
 const sshKeys = () => process.env.ES_SSH_KEYS.split(",")
 
 const dropletConfig = subscription => {
+  const name = [
+    "Node",
+    subscription.plan.metadata.region,
+    subscription.plan.metadata.size,
+    subscription.id,
+    subscription.customer
+  ].join("-").replace(/_/g, ".")
   return {
-    "name": `Node ${subscription.plan.metadata.region} ${subscription.plan.metadata.size} ${subscription.id} ${subscription.customer}`,
-    "region": subscription.plan.metadata.region,
-    "size": subscription.plan.metadata.size,
-    "image": "docker",
-    "ssh_keys": sshKeys(),
-    "user_data": userDataScript(subscription.id),
-    "ipv6": true,
-    "monitoring": true,
+    name,
+    region: subscription.plan.metadata.region,
+    size: subscription.plan.metadata.size,
+    image: "docker",
+    ssh_keys: sshKeys(),
+    user_data: userDataScript(subscription.id),
+    ipv6: true,
+    monitoring: true,
   }
 }
 
@@ -62,16 +93,6 @@ module.exports.createDroplet = (event, context, callback) => {
   // Create droplet
   const config = dropletConfig(subscription(event))
   DigitalOcean.dropletsCreate(config)
-  .then ( _ => {
-    callback(null, {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: 'Droplet created'
-      })
-    })
-  })
-  .catch( error => {
-    console.log(error)
-    callback(JSON.stringify(error))
-  })
+  .then (() => success(callback))
+  .catch(e => error(e, callback))
 }

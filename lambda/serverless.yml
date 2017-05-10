@@ -9,7 +9,6 @@ provider:
   region: us-east-1
 
   environment:
-    ES_DEFAULT_PLAN_ID: ${env:ES_DEFAULT_PLAN_ID, file(.env.yml):ES_DEFAULT_PLAN_ID}
     ES_STRIPE_SECRET_KEY: ${env:ES_STRIPE_SECRET_KEY, file(.env.yml):ES_STRIPE_SECRET_KEY}
     ES_FIREBASE_ENDPOINT: ${env:ES_FIREBASE_ENDPOINT, file(.env.yml):ES_FIREBASE_ENDPOINT}
     ES_FIREBASE_TOKEN: ${env:ES_FIREBASE_TOKEN, file(.env.yml):ES_FIREBASE_TOKEN}

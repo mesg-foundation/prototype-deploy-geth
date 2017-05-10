@@ -5,26 +5,28 @@ const Http = require('axios');
 
 /**
  * Call the callback with a success respond that return the customer
- * @param {Object} customer - https://stripe.com/docs/api#customers
  * @param {Function} callback - Callback for lambda
  */
-const success = (customer, callback) => callback(null, {
-  statusCode: 200,
-  body: JSON.stringify(customer)
-});
+const success = callback => {
+  callback(null, {
+    statusCode: 200,
+    body: JSON.stringify(null)
+  })
+};
 
 /**
  * Call the callback with an error respond that contains the error
  * @param {Error} error - Error triggered
  * @param {Function} callback - Callback for lambda
  */
-const error = (error, callback) => {
-  console.log(error);
-  return callback(null, {
+const error = (e, callback) => {
+  const body = JSON.stringify(e.message ? { error: e.message } : e)
+  console.log(body)
+  callback(null, {
     statusCode: 400,
-    body: JSON.stringify(error)
-  });
-};
+    body
+  })
+}
 
 /**
  * Get the Stripe customer object based on the subscription
@@ -45,7 +47,7 @@ const updateFirebaseCustomer = customer => {
   if (!firebaseCustomerId) { throw new Error('Customer should contain a firebase_id attribute'); }
   const endpoint = `${process.env.ES_FIREBASE_ENDPOINT}/users/${firebaseCustomerId}.json?auth=${process.env.ES_FIREBASE_TOKEN}`;
   return Http.patch(endpoint, customer)
-  .then(response => response.data);
+  .then(response => response.data)
 };
 
 /**
@@ -68,7 +70,7 @@ module.exports.updateFromCustomerUpdate = (event, context, callback) => {
   const customerId = ((JSON.parse(event.body).data || {}).object || {}).id;
   if (!customerId) { throw new Error('Invalid customer Id'); }
   updateDataFor(customerId)
-  .then(customer => success(customer, callback))
+  .then(customer => success(callback))
   .catch(e => error(e, callback));
 };
 
@@ -83,6 +85,6 @@ module.exports.updateFromSubscriptionUpdate = (event, context, callback) => {
   const customerId = ((JSON.parse(event.body).data || {}).object || {}).customer;
   if (!customerId) { throw new Error('Invalid customer Id'); }
   updateDataFor(customerId)
-  .then(customer => success(customer, callback))
+  .then(customer => success(callback))
   .catch(e => error(e, callback));
 };

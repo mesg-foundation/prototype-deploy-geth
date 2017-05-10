@@ -2,15 +2,29 @@
 
 const Stripe = require('stripe')(process.env.ES_STRIPE_SECRET_KEY);
 
-const successResponse = {
+/**
+ * Call the callback with a success respond that return the customer
+ * @param {Object} customer - https://stripe.com/docs/api#customers
+ * @param {Function} callback - Callback for lambda
+ */
+const success = (callback) => callback(null, {
   statusCode: 200,
   body: JSON.stringify(null)
-}
+});
 
-const errorResponse = e => ({
-  statusCode: 400,
-  body: JSON.stringify(e)
-})
+/**
+ * Call the callback with an error respond that contains the error
+ * @param {Error} error - Error triggered
+ * @param {Function} callback - Callback for lambda
+ */
+const error = (e, callback) => {
+  const body = JSON.stringify(e.message ? { error: e.message } : e)
+  console.log(body)
+  callback(null, {
+    statusCode: 400,
+    body
+  })
+}
 
 /**
  * Convert the params from serverless event to an object
@@ -81,9 +95,6 @@ module.exports.updateMetaData = (event, context, callback) => {
     notifyCustomerByEmail(customer, subscription, paritySignerToken, params),
     notifyTeamBySlack(customer, subscription, params),
   ]))
-  .then(() => callback(null, successResponse))
-  .catch(e => {
-    console.log(e);
-    callback(null, errorResponse(e));
-  });
+  .then(() => success(callback))
+  .catch(e => error(e, callback))
 };
