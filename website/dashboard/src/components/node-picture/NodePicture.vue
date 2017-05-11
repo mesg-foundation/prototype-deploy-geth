@@ -1,3 +1,8 @@
+<template>
+  <img v-if="isComplete" :src="src">
+  <v-progress-circular v-else indeterminate size="20" class="primary--text" />
+</template>
+
 <script>
   export default {
     props: {
@@ -9,15 +14,10 @@
     computed: {
       src () {
         return require('@/assets/ethereum.png')
+      },
+      isComplete () {
+        return true
       }
-    },
-    render (createElement) {
-      return createElement('img', {
-        style: this.style,
-        attrs: {
-          src: this.src
-        }
-      })
     }
   }
 </script>
@@ -26,9 +26,12 @@
   @import '../../variables'
 
   img {
+    border-radius: 50%;
+  }
+
+  img, .progress-circular {
     height: 1.5em;
     width: 1.5em;
-    border-radius: 50%;
     float: left;
     margin-right: 1em;
   }
