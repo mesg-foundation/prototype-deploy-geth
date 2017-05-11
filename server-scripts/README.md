@@ -1,3 +1,16 @@
+## Setup
+
+```
+setup.sh $ES_STRIPE_SUBSCRIPTION_ID $ES_ENDPOINT_DROPLET_CREATED
+```
+
+## Parity Update Config
+
+```
+parity/update-config.sh $RPC_CORS
+```
+
+
 ### Fetch and execute the install script
 
 ```
