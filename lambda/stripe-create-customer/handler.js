@@ -69,9 +69,8 @@ const createSubscription = (data, customer) => {
  */
 module.exports.createCustomer = (event, context, callback) => {
   const data = JSON.parse(event.body);
-  console.log(JSON.stringify(data))
-  createCustomer(event)
-  .then(customer => createSubscription(event, customer))
+  createCustomer(data)
+  .then(customer => createSubscription(data, customer))
   .then(subscription => success(subscription, callback))
   .catch(e => error(e, callback))
 };
