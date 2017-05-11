@@ -1,0 +1,24 @@
+{
+  "name": "droplet-update-config",
+  "version": "1.0.0",
+  "description": "Lambda function that update the config of parity on a droplet",
+  "main": "handler.js",
+  "dependencies": {
+    "node-ssh": "^4.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.com:etherstellar/etherstellar.git"
+  },
+  "keywords": [],
+  "author": "EtherStellar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/etherstellar/etherstellar"
+  },
+  "homepage": "https://gitlab.com/etherstellar/etherstellar"
+}

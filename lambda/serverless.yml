@@ -53,5 +53,11 @@ functions:
     events:
       - http: post /nodes
 
+  #node-update-config
+  node-update-config:
+    handler: node-update-config/handler.updateConfig
+    events:
+      - http: post /nodes/update
+
   #digitalocean-create-droplet-get-image-list:
   #  handler: digitalocean-create-droplet/help.getImageList
