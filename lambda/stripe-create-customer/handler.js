@@ -40,7 +40,7 @@ const createCustomer = data => {
     source: data.stripeToken,
     email: data.stripeEmail,
     metadata: {
-      firebase_id: data.user.id
+      firebase_id: data.user.uid
     }
   };
   return stripe.customers.create(customerData)
@@ -69,6 +69,7 @@ const createSubscription = (data, customer) => {
  */
 module.exports.createCustomer = (event, context, callback) => {
   const data = JSON.parse(event.body);
+  console.log(JSON.stringify(data))
   createCustomer(event)
   .then(customer => createSubscription(event, customer))
   .then(subscription => success(subscription, callback))
