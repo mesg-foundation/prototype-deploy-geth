@@ -23,7 +23,7 @@ $ES_SCRIPTS_PATH/parity/install.sh
 $ES_SCRIPTS_PATH/parity/run.sh
 
 # Generate the parity signer token
-parity_signer_token=$($ES_SCRIPTS_PATH/parity/generate-signer-token.sh)
+# parity_signer_token=$($ES_SCRIPTS_PATH/parity/generate-signer-token.sh)
 
 # Execute webhook on Lambda
 curl -X POST \

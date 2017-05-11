@@ -72,5 +72,5 @@ module.exports.createCustomer = (event, context, callback) => {
   createCustomer(event)
   .then(customer => createSubscription(event, customer))
   .then(subscription => success(subscription, callback))
-  .catch(e => error(error, callback))
+  .catch(e => error(e, callback))
 };
