@@ -21,7 +21,8 @@ export const KEYS = {
     PAYMENT_IN_PROGRESS: 'PAYMENT_IN_PROGRESS',
     PAYMENT_ERROR: 'PAYMENT_ERROR',
     PLANS_FETCHED: 'PLANS_FETCHED',
-    CHAINS_FETCHED: 'CHAINS_FETCHED'
+    CHAINS_FETCHED: 'CHAINS_FETCHED',
+    ADD_NODES: 'ADD_NODES'
   }
 }
 
@@ -33,6 +34,7 @@ export default new Vuex.Store({
     chains: null,
     planList: [],
     plans: null,
+    nodes: [],
     newNode: {
       plan: null,
       chain: null
@@ -76,6 +78,9 @@ export default new Vuex.Store({
     [KEYS.MUTATIONS.CHAINS_FETCHED] (state, chains) {
       state.chains = chains
       state.chainList = Object.keys(chains).map(key => chains[key])
+    },
+    [KEYS.MUTATIONS.ADD_NODES] (state, nodes) {
+      state.nodes = nodes
     }
   }
 })
