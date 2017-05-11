@@ -5,6 +5,7 @@ import App from '@/App'
 import router from '@/router'
 import store from '@/store'
 import FirebaseMixin from '@/mixins/firebase'
+import MomentMixin from '@/mixins/moment'
 import { initializeFirebase } from '@/helpers/firebase'
 
 Vue.config.productionTip = process.env.NODE_ENV !== 'production'
@@ -13,6 +14,7 @@ Vue.use(Vuetify)
 Vue.use(VueI18n)
 
 Vue.mixin(FirebaseMixin)
+Vue.mixin(MomentMixin)
 
 initializeFirebase(store, router)
 

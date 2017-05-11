@@ -11,7 +11,7 @@
         {{ props.item.id }}
       </td>
       <td>{{ props.item.plan.metadata.size }}</td>
-      <td>{{ props.item.created }}</td>
+      <td>{{ props.item.created | timeAgo }}</td>
       <td class="text-xs-right">
         <v-btn primary flat router :to="{ name: 'Node', params: { id: props.item.id } }">{{ $t('action') }}</v-btn>
       </td>
