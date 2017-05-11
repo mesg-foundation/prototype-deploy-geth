@@ -10,3 +10,6 @@ source $envPath
 
 # Create shared folder
 mkdir -p $ES_PARITY_SHARED_FOLDER
+
+# Create config.toml
+$ES_SCRIPTS_PATH/parity/update-config.sh ""
