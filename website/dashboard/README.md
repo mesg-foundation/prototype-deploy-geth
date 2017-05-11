@@ -32,3 +32,13 @@ npm test
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+## Create a new component
+
+To create a new component you can run the following command.
+For now you still have to pass your component first in **CamelCase** then in **dash-case**
+
+``` bash
+./create-component MyComponent my-component
+```

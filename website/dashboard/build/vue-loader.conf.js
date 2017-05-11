@@ -8,5 +8,8 @@ module.exports = {
       ? config.build.productionSourceMap
       : config.dev.cssSourceMap,
     extract: isProduction
-  })
+  }),
+  loaders: {
+    i18n: '@kazupon/vue-i18n-loader'
+  }
 }
