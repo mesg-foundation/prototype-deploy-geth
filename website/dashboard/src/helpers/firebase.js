@@ -29,9 +29,9 @@ const onSignIn = (store, router, user) => {
       providerData,
       refreshToken,
       photoURL,
-      uid,
-      data: snapshot.val()
+      uid
     })
+    store.commit(KEYS.MUTATIONS.ADD_NODES, snapshot.val().subscriptions.data)
   })
 }
 
