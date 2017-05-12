@@ -11,6 +11,6 @@ module.exports = merge(prodEnv, {
     storageBucket: "etherstellardev.appspot.com",
     messagingSenderId: "499625803520"
   }),
-  NODE_CREATION_ENDPOINT: '"https://96fayj1une.execute-api.us-east-1.amazonaws.com/development/stripe-create-customer"',
+  NODE_CREATION_ENDPOINT: '"https://n6akjd8g2g.execute-api.us-east-1.amazonaws.com/development/customers"',
   STRIPE_PUBLIC_KEY: '"pk_test_3MyD4btgQPDolKw2MXnNpgDc"'
 })

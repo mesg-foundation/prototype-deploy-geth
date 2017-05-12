@@ -8,6 +8,6 @@ module.exports = {
     storageBucket: 'etherstellar.appspot.com',
     messagingSenderId: '526616243776'
   }),
-  NODE_CREATION_ENDPOINT: '"https://rc3m1n7kk8.execute-api.us-east-1.amazonaws.com/production/stripe-create-customer"',
+  NODE_CREATION_ENDPOINT: '"https://zreu033swa.execute-api.us-east-1.amazonaws.com/production/customers"',
   STRIPE_PUBLIC_KEY: '"TODO"'
 }
