@@ -13,7 +13,7 @@ configPath=$ES_PARITY_SHARED_FOLDER/config.toml
 cp $configTplPath $configPath
 
 # Replace tpl variable with data
-sed -i -e 's/%RPC_CORS%/"'$RPC_CORS'"/g' $configPath
+sed -i -e 's/%RPC_CORS%/'$RPC_CORS'/g' $configPath
 
 # Restart parity docker
 docker restart $ES_PARITY_DOCKER_NAME

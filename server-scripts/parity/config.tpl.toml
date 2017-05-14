@@ -9,7 +9,7 @@ disable = true
 
 [rpc]
 interface = "0.0.0.0"
-cors = %RPC_CORS%
+cors = "%RPC_CORS%"
 apis = ["rpc"]
 
 [ipc]

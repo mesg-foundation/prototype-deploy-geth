@@ -1,6 +1,6 @@
 'use strict'
 
-const node_ssh = require('node-ssh')
+const nodeSSH = require('node-ssh')
 
 /**
  * Return a success response when the subscription has been created
@@ -39,7 +39,7 @@ const updateNodeConfig = (host, rpcCors) => {
     username: 'root',
     privateKey: '/Users/Nico/.ssh/id_rsa', // @TODO: load fron ENV. and create a special SSH KEY
   }
-  const ssh = new node_ssh()
+  const ssh = new nodeSSH()
 
   return ssh.connect(config)
   .then(() => {
