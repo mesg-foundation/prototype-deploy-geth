@@ -4,6 +4,7 @@
   "description": "Lambda function that update the config of parity on a droplet",
   "main": "handler.js",
   "dependencies": {
+    "firebase-admin": "^4.2.1",
     "node-ssh": "^4.2.2"
   },
   "devDependencies": {},

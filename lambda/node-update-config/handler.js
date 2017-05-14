@@ -1,5 +1,6 @@
 'use strict'
 
+const firebaseAdmin = require("firebase-admin");
 const nodeSSH = require('node-ssh')
 
 /**
@@ -69,13 +70,37 @@ const updateStripeSubscription = (rpcCors) => {
   return Promise.resolve()
 }
 
+const initFirebase = () => {
+  firebaseAdmin.initializeApp({
+    credential: firebaseAdmin.credential.cert({
+      projectId: process.env.ES_FIREBASE_PROJECT_ID,
+      clientEmail: process.env.ES_FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.ES_FIREBASE_PRIVATE_KEY,
+    }),
+    databaseURL: process.env.ES_FIREBASE_ENDPOINT
+  })
+}
+
+/**
+ * Authentification against Firebase
+ * @param {String} token - Firebase authenticatification token
+ */
+const verifyFirebaseToken = (token) => {
+  return firebaseAdmin.auth().verifyIdToken(token)
+  .then((decodedToken) => {
+    const uid = decodedToken.uid
+  })
+}
+
 /**
  * Serverless handler
  */
 module.exports.updateConfig = (event, context, callback) => {
   const data = JSON.parse(event.body)
-  
-  updateNodeConfig(data.host, data.rpcCors)
+
+  initFirebase()
+  verifyFirebaseToken(data.token)
+  .then(() => updateNodeConfig(data.host, data.rpcCors))
   .then(() => updateStripeSubscription(data.rpcCors))
   .then(() => success(callback))
   .catch(e => error(e, callback))
