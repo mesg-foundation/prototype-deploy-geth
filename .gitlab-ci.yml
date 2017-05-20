@@ -18,7 +18,7 @@ variables:
 
   ETHERSTELLAR_IO_PATH: website/etherstellar.io
   ETHERSTELLAR_IO_BUILD_PATH: $ETHERSTELLAR_IO_PATH/build
-  ETHERSTELLAR_IO_DIST_PATH: $ETHERSTELLAR_IO_PATH/dist
+  ETHERSTELLAR_IO_DIST_PATH: $ETHERSTELLAR_IO_PATH/src
   ETHERSTELLAR_IO_BUCKET_NAME_DEVELOPMENT: development.etherstellar.io
   ETHERSTELLAR_IO_BUCKET_NAME_PRODUCTION: etherstellar.io
 
@@ -104,26 +104,26 @@ deploy-server-scripts-production:
     name: server-scripts-production
 
 # Etherstellar.io
-# deploy-etherstellar.io-development:
-#   image: noxan/docker-node-awscli-yarn
-#   stage: deploy
-#   variables:
-#     ETHERSTELLAR_IO_BUCKET_NAME: $ETHERSTELLAR_IO_BUCKET_NAME_DEVELOPMENT
-#   script:
-#     - sh $ETHERSTELLAR_IO_BUILD_PATH/deploy.sh development
-#   only:
-#     - development
-#   environment:
-#     name: etherstellar.io-development
-#
-# deploy-etherstellar.io-production:
-#   image: noxan/docker-node-awscli-yarn
-#   stage: deploy
-#   variables:
-#     ETHERSTELLAR_IO_BUCKET_NAME: $ETHERSTELLAR_IO_BUCKET_NAME_PRODUCTION
-#   script:
-#     - sh $ETHERSTELLAR_IO_BUILD_PATH/deploy.sh production
-#   only:
-#     - master
-#   environment:
-#     name: etherstellar.io-production
+deploy-etherstellar.io-development:
+  image: noxan/docker-node-awscli-yarn
+  stage: deploy
+  variables:
+    ETHERSTELLAR_IO_BUCKET_NAME: $ETHERSTELLAR_IO_BUCKET_NAME_DEVELOPMENT
+  script:
+    - sh $ETHERSTELLAR_IO_BUILD_PATH/deploy.sh development
+  only:
+    - development
+  environment:
+    name: etherstellar.io-development
+
+deploy-etherstellar.io-production:
+  image: noxan/docker-node-awscli-yarn
+  stage: deploy
+  variables:
+    ETHERSTELLAR_IO_BUCKET_NAME: $ETHERSTELLAR_IO_BUCKET_NAME_PRODUCTION
+  script:
+    - sh $ETHERSTELLAR_IO_BUILD_PATH/deploy.sh production
+  only:
+    - master
+  environment:
+    name: etherstellar.io-production

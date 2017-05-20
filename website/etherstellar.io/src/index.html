@@ -1,36 +1,37 @@
 <!doctype html>
-
 <html lang="en">
 <head>
   <meta charset="utf-8">
 
-  <title>Etherstellar.io</title>
-  <style>
-    span.error { display: none; }
-  </style>
+  <title>EtherStellar</title>
+  <meta name="description" content="Ethereum node as demand">
+
+  <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <div class="background">
+        <img class="logo" src="ES-logo.svg" />
 
-  <form id="customer-form">
+        <!-- Begin MailChimp Signup Form -->
+        <div id="mc_embed_signup">
+        <form action="//etherstellar.us15.list-manage.com/subscribe/post?u=9f9700007fbe6fb584cb62ec3&amp;id=a6403624d4" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <div id="mc_embed_signup_scroll">
+            <label for="mce-EMAIL">Subscribe to our mailing list</label>
+            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_9f9700007fbe6fb584cb62ec3_a6403624d4" tabindex="-1" value=""></div>
+            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+            </div>
+        </form>
+        </div>
+        <!--End mc_embed_signup-->
 
-    <span class="error" data-code="auth/email-already-in-use">
-      This email is already used, please connect on your dashboard to get more servers
-    </span>
+        <div class="contactus">
+            <a href="mailto:contact@etherstellar.io">Contact us</a>
+        </div>
 
-    <label>
-      email
-      <input type="email">
-    </label>
-
-    <label>
-      password
-      <input type="password">
-    </label>
-
-    <input type="submit">
-  </form>
-
-  <script src="https://checkout.stripe.com/checkout.js"></script>
+    </div>
 </body>
 </html>
