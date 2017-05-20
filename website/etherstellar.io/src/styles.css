@@ -1,0 +1,72 @@
+body, html {
+    height: 100%;
+    margin: 0;
+
+    font-family: "Roboto", "Helvetica", "Arial", "sans-serif";
+    font-size: 14px;
+    font-weight: 200;
+    color: #FFFFFF;
+}
+
+a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+a:hover {
+    color: #13ACFF;
+}
+
+body {
+    background-color: #000000;   
+}
+
+.background {
+    text-align: center;
+
+
+    /*background-image: url("ES-wallpaper.jpg");
+
+    height: 100%; 
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;*/
+}
+
+.logo {
+    
+}
+
+.contactus {
+    margin-top: 70px;
+    font-size: 30px;
+}
+
+#mc_embed_signup{
+    clear:left;
+    width:80%;
+    margin: auto;
+}
+
+#mc_embed_signup label {
+    font-size: 30px;
+    font-weight: 200;
+}
+
+#mc_embed_signup input.email {
+    font-family: "Roboto", "Helvetica", "Arial", "sans-serif";
+    font-size: 15px;
+    font-weight: 200;
+}
+
+#mc_embed_signup .button {
+    font-family: "Roboto", "Helvetica", "Arial", "sans-serif";
+    font-size: 15px;
+    font-weight: 200;
+
+    background-color: #13ACFF;
+}
+
+#mc_embed_signup .button:hover {
+    background-color: #FF9813;
+}
